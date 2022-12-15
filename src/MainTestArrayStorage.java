@@ -36,5 +36,4 @@ public class MainTestArrayStorage {
             System.out.println(r);
         }
     }
-
 }
