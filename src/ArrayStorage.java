@@ -4,8 +4,8 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int size = 0;
+    private final Resume[] storage = new Resume[10000];
+    private int size = 0;
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
