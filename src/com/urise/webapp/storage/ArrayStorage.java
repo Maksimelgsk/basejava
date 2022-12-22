@@ -1,3 +1,7 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -12,29 +16,43 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void save(Resume r) {
-        int index = getIndex(r.uuid);
-        if (index < 0) {
-            storage[size++] = r;
+    public void update(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (index == -1) {
+            System.out.println("ERROR: resume " + r + " is not exist");
         } else {
-            System.out.println("Resume " + r + " already exists");
+            storage[index] = r;
+        }
+    }
+
+    public void save(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (index != -1) {
+            System.out.println("ERROR: resume " + r + " already exists");
+        } else if (size == storage.length) {
+            System.out.println("ERROR: resume storage is filled");
+        } else {
+            storage[size++] = r;
         }
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
-            return storage[index];
+        if (index == -1) {
+            System.out.println("ERROR: resume " + uuid + " is not exist");
+            return null;
         }
-        return null;
+        return storage[index];
     }
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index > 0) {
-            size--;
+        if (index != -1) {
             System.arraycopy(storage, index + 1, storage, index, size - index);
+            size--;
+        } else {
             storage[size] = null;
+            System.out.println("ERROR: resume " + uuid + " is not exist");
         }
     }
 
@@ -51,7 +69,7 @@ public class ArrayStorage {
 
     private int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }
