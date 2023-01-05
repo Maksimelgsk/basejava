@@ -12,7 +12,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         storage[size] = r;
     }
     @Override
-    protected void fillDeletedIndex(int index){
+    protected void fillDeleteResume(int index){
         storage[index] = storage[size - 1];
     }
 
