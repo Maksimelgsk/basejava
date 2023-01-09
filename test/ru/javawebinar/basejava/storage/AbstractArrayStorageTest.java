@@ -1,6 +1,5 @@
 package ru.javawebinar.basejava.storage;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.javawebinar.basejava.exception.ExistStorageException;
@@ -17,10 +16,10 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_3 = "uuid_3";
     private static final String UUID_4 = "uuid_4";
     private static final String UUID_NOT_EXIST = "dummy";
-    private static final Resume RESUME_1= new Resume(UUID_1);
-    private static final Resume RESUME_2= new Resume(UUID_2);
-    private static final Resume RESUME_3= new Resume(UUID_3);
-    private static final Resume RESUME_4= new Resume(UUID_4);
+    private static final Resume RESUME_1 = new Resume(UUID_1);
+    private static final Resume RESUME_2 = new Resume(UUID_2);
+    private static final Resume RESUME_3 = new Resume(UUID_3);
+    private static final Resume RESUME_4 = new Resume(UUID_4);
 
     public AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
@@ -77,7 +76,7 @@ public abstract class AbstractArrayStorageTest {
             try {
                 storage.save(new Resume("uuid_" + i));
             } catch (StorageException e) {
-                Assert.fail(e.getMessage());
+                fail(e.getMessage());
             }
         }
         storage.save(new Resume());
@@ -112,9 +111,9 @@ public abstract class AbstractArrayStorageTest {
     public void getAll() {
         Resume[] expectedResumes = {RESUME_1, RESUME_2, RESUME_3};
         Resume[] resumes = storage.getAll();
-        Assert.assertEquals(expectedResumes[0], resumes[0]);
-        Assert.assertEquals(expectedResumes[1], resumes[1]);
-        Assert.assertEquals(expectedResumes[2], resumes[2]);
+        assertEquals(expectedResumes[0], resumes[0]);
+        assertEquals(expectedResumes[1], resumes[1]);
+        assertEquals(expectedResumes[2], resumes[2]);
         assertSize(3);
     }
 
@@ -123,11 +122,11 @@ public abstract class AbstractArrayStorageTest {
         assertSize(3);
     }
 
-    public void assertSize(int size){
+    public void assertSize(int size) {
         assertEquals(size, storage.size());
     }
 
-    public void assertGet(Resume r){
+    public void assertGet(Resume r) {
         assertEquals(r, storage.get(r.getUuid()));
     }
 }
