@@ -15,6 +15,7 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_1 = "uuid_1";
     private static final String UUID_2 = "uuid_2";
     private static final String UUID_3 = "uuid_3";
+    private static final String UUID_NOT_EXIST = "dumm";
 
     protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
