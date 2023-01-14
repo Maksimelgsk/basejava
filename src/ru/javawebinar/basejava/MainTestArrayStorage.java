@@ -1,15 +1,20 @@
 package ru.javawebinar.basejava;
 
 import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.storage.SortedArrayStorage;
+import ru.javawebinar.basejava.storage.ListStorage;
 import ru.javawebinar.basejava.storage.Storage;
 
 /**
  * Test for your ru.javawebinar.basejava.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-//    private static final Storage ARRAY_STORAGE = new ArrayStorage();
-      private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
+    /**
+     * MainTestArrayStorage implement ListStorage class
+     * For run MainTestArrayStorage also can be used codes below:
+     * private static final Storage ARRAY_STORAGE = new ArrayStorage();
+     * private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
+     */
+    private static final Storage ARRAY_STORAGE = new ListStorage();
 
     public static void main(String[] args) {
         final Resume r3 = new Resume("uuid3");

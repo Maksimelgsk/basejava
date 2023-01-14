@@ -1,7 +1,7 @@
 package ru.javawebinar.basejava;
 
 import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.storage.SortedArrayStorage;
+import ru.javawebinar.basejava.storage.ListStorage;
 import ru.javawebinar.basejava.storage.Storage;
 
 import java.io.BufferedReader;
@@ -13,8 +13,13 @@ import java.io.InputStreamReader;
  * (just run, no need to understand)
  */
 public class MainArray {
-//    private final static Storage ARRAY_STORAGE = new ArrayStorage();
-    private final static Storage ARRAY_STORAGE = new SortedArrayStorage();
+    /**
+     * MainTestArrayStorage implement ListStorage class
+     * For run MainArray also can be used codes below:
+     * private static final Storage ARRAY_STORAGE = new ArrayStorage();
+     * private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
+     */
+    private final static Storage ARRAY_STORAGE = new ListStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
