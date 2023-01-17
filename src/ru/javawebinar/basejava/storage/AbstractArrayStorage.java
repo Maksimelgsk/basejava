@@ -1,9 +1,7 @@
 package ru.javawebinar.basejava.storage;
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
-
 import java.util.Arrays;
-
 
 /**
  * Array based storage for Resumes
@@ -19,34 +17,34 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, int index) {
-        storage[index] = r;
+    protected void doUpdate(Resume r, Object searchKey) {
+        storage[(int) searchKey] = r;
     }
 
     @Override
-    protected void doSave(Resume r, int index) {
+    protected void doSave(Resume r, Object searchKey) {
         if (size >= STORAGE_SIZE) {
             throw new StorageException(r.getUuid(), "ERROR: resume storage is filled");
         } else {
-            insertResume(r, index);
+            insertResume(r, (int) searchKey);
             size++;
         }
     }
     @Override
-    protected void doDelete(int index){
-        fillDeleteResume(index);
+    protected void doDelete(Object searchKey){
+        fillDeleteResume((int)searchKey);
         storage[size - 1] = null;
         size--;
     }
 
     @Override
-    protected Resume doGet(int index){
-        return storage[index];
+    protected Resume doGet(Object searchKey){
+        return storage[(int)searchKey];
     }
 
     @Override
-    protected boolean isExist(int index){
-        return index >= 0;
+    protected boolean isExist(Object searchKey){
+        return (int)searchKey >= 0;
     }
 
     @Override
@@ -59,8 +57,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    protected abstract int getIndex(String uuid);
-    protected abstract void insertResume(Resume r, int index);
-    protected abstract void fillDeleteResume(int index);
+    protected abstract Object getSearchKey(String uuid);
+    protected abstract void insertResume(Resume r, int searchKey);
+    protected abstract void fillDeleteResume(int searchKey);
 
 }

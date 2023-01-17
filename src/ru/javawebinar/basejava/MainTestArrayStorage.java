@@ -2,6 +2,7 @@ package ru.javawebinar.basejava;
 
 import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.storage.ListStorage;
+import ru.javawebinar.basejava.storage.MapStorage;
 import ru.javawebinar.basejava.storage.Storage;
 
 /**
@@ -13,8 +14,9 @@ public class MainTestArrayStorage {
      * For run MainTestArrayStorage also can be used codes below:
      * private static final Storage ARRAY_STORAGE = new ArrayStorage();
      * private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
+     * private static final Storage ARRAY_STORAGE = new ListStorage();
      */
-    private static final Storage ARRAY_STORAGE = new ListStorage();
+    private static final Storage ARRAY_STORAGE = new MapStorage();
 
     public static void main(String[] args) {
         final Resume r3 = new Resume("uuid3");
