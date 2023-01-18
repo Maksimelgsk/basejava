@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapStorage extends AbstractStorage{
+public class MapResumeStorage extends AbstractStorage{
 
-    Map<String, Resume> mapResumes = new HashMap<>();
+    private final Map<String, Resume> mapResumes = new HashMap<>();
 
     @Override
     protected void doUpdate(Resume r, Object searchKey) {
-        mapResumes.replace(r.getUuid(), r);
+        mapResumes.put(r.getUuid(), r);
     }
 
     @Override
