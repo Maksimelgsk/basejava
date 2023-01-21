@@ -11,28 +11,33 @@ public class MapResumeStorage extends AbstractStorage{
     private final Map<String, Resume> mapResumes = new HashMap<>();
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
+    public void clear() {
+        mapResumes.clear();
+    }
+
+    @Override
+    protected void doUpdate(Resume r, Object resume) {
         mapResumes.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
+    protected void doSave(Resume r, Object resume) {
         mapResumes.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-        mapResumes.values().remove((Resume) searchKey);
+    protected void doDelete(Object resume) {
+        mapResumes.values().remove((Resume) resume);
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
-        return (Resume) searchKey;
+    protected Resume doGet(Object resume) {
+        return (Resume) resume;
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return searchKey != null;
+    protected boolean isExist(Object resume) {
+        return resume != null;
     }
 
     @Override
@@ -40,16 +45,10 @@ public class MapResumeStorage extends AbstractStorage{
         return mapResumes.get(uuid);
     }
 
-    @Override
-    public void clear() {
-        mapResumes.clear();
-    }
 
     @Override
-    public Resume[] getAll() {
-        int size = mapResumes.size();
-        List<Resume> resumes = new ArrayList<>(mapResumes.values());
-        return resumes.toArray(new Resume[size]);
+    protected List<Resume> doGetAll() {
+        return new ArrayList<>(mapResumes.values());
     }
 
     @Override

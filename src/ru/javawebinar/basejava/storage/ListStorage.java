@@ -13,39 +13,28 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-        listResumes.set((int) searchKey, r);
+    protected void doUpdate(Resume r, Object index) {
+        listResumes.set((int) index, r);
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
+    protected void doSave(Resume r, Object index) {
         listResumes.add(r);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-        listResumes.remove((int) searchKey);
+    protected void doDelete(Object index) {
+        listResumes.remove((int) index);
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
-        return listResumes.get((int) searchKey);
+    protected Resume doGet(Object index) {
+        return listResumes.get((int) index);
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return (int) searchKey >= 0;
-    }
-
-    @Override
-    public Resume[] getAll() {
-        Resume[] r = new Resume[listResumes.size()];
-        return listResumes.toArray(r);
-    }
-
-    @Override
-    public int size() {
-        return listResumes.size();
+    protected boolean isExist(Object index) {
+        return (int) index >= 0;
     }
 
     @Override
@@ -56,5 +45,14 @@ public class ListStorage extends AbstractStorage {
             }
         }
         return -1;
+    }
+
+    @Override
+    protected List<Resume> doGetAll() {
+        return new ArrayList<>(listResumes);
+    }
+    @Override
+    public int size() {
+        return listResumes.size();
     }
 }

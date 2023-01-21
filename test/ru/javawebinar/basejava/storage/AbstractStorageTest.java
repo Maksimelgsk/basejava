@@ -4,24 +4,33 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
-import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
-    private final Storage storage;
+    protected final Storage storage;
     private static final String UUID_1 = "uuid_1";
     private static final String UUID_2 = "uuid_2";
     private static final String UUID_3 = "uuid_3";
     private static final String UUID_4 = "uuid_4";
     private static final String UUID_NOT_EXIST = "dummy";
-    private static final Resume RESUME_1 = new Resume(UUID_1);
-    private static final Resume RESUME_2 = new Resume(UUID_2);
-    private static final Resume RESUME_3 = new Resume(UUID_3);
-    private static final Resume RESUME_4 = new Resume(UUID_4);
+    private static final Resume RESUME_1;
+    private static final Resume RESUME_2;
+    private static final Resume RESUME_3;
+    private static final Resume RESUME_4;
 
-    public AbstractStorageTest(Storage storage) {
+    static {
+        RESUME_1 = new Resume(UUID_1, "Name1");
+        RESUME_2 = new Resume(UUID_2, "Name2");
+        RESUME_3 = new Resume(UUID_3, "Name3");
+        RESUME_4 = new Resume(UUID_4, "Name4");
+    }
+
+    protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
@@ -37,24 +46,28 @@ public abstract class AbstractStorageTest {
     public void clear() {
         storage.clear();
         assertSize(0);
-        Resume[] resumes = storage.getAll();
-        assertEquals(0, resumes.length);
+        List<Resume> resumes = storage.getAllSorted();
+        assertEquals(0, resumes.size());
     }
 
     @Test
     public void update() {
-        storage.update(RESUME_1);
-        storage.update(RESUME_2);
-        storage.update(RESUME_3);
+        Resume r1 = new Resume(UUID_1, "newName1");
+        Resume r2 = new Resume(UUID_2, "newName2");
+        Resume r3 = new Resume(UUID_3, "newName3");
+        storage.update(r1);
+        storage.update(r2);
+        storage.update(r3);
         assertSize(3);
-        assertSame(RESUME_1, storage.get(UUID_1));
-        assertSame(RESUME_2, storage.get(UUID_2));
-        assertSame(RESUME_3, storage.get(UUID_3));
+        assertSame(r1, storage.get(UUID_1));
+        assertSame(r2, storage.get(UUID_2));
+        assertSame(r3, storage.get(UUID_3));
     }
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
         storage.update(new Resume(UUID_NOT_EXIST));
+        storage.get(UUID_NOT_EXIST);
     }
 
     @Test
@@ -67,19 +80,6 @@ public abstract class AbstractStorageTest {
     @Test(expected = ExistStorageException.class)
     public void saveExist() {
         storage.save(RESUME_1);
-    }
-
-    @Test(expected = StorageException.class)
-    public void saveOverflow() {
-        storage.clear();
-        for (int i = 0; i < AbstractArrayStorage.STORAGE_SIZE; i++) {
-            try {
-                storage.save(new Resume("uuid_" + i));
-            } catch (StorageException e) {
-                fail(e.getMessage());
-            }
-        }
-        storage.save(new Resume());
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -107,13 +107,10 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() {
-        Resume[] expectedResumes = {RESUME_1, RESUME_2, RESUME_3};
-        Resume[] resumes = storage.getAll();
-        assertEquals(expectedResumes[0], resumes[0]);
-        assertEquals(expectedResumes[1], resumes[1]);
-        assertEquals(expectedResumes[2], resumes[2]);
-        assertSize(3);
+    public void getAllSorted() {
+        List<Resume> resumes = storage.getAllSorted();
+        assertEquals(3, resumes.size());
+        assertEquals(resumes, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
     }
 
     @Test
