@@ -84,12 +84,12 @@ public class ResumeTestData {
         resume.setSections(QUALIFICATIONS, new ListSection(qualifications));
 
         //EXPERIENCE
-        Map<Link,Organization> experience = new HashMap<>();
-        experience.put(new Link("https://javaops.ru/", "Java Online Projects"), new Organization(
+        Map<Organization, Period> experience = new HashMap<>();
+        experience.put(new Organization("https://javaops.ru/", "Java Online Projects"), new Period(
                 LocalDate.of(2013, 10, 1),
                 LocalDate.now(), "Создание, организация и проведение Java онлайн проектов и стажировок.",
                 "Автор проекта.\n"));
-        experience.put(new Link("https://www.wrike.com/", "RIT Center"), new Organization(
+        experience.put(new Organization("https://www.wrike.com/", "RIT Center"), new Period(
                 LocalDate.of(2012, 4, 1),
                 LocalDate.of(2014, 10, 1), """
                 Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование,
@@ -98,32 +98,32 @@ public class ResumeTestData {
                 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html).Интеграция Alfresco JLAN
                 для online редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache
                 Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix
-                shell remote scripting via ssh tunnels, PL/Python""", "Java архитектор"));
-        experience.put(new Link("https://www.luxoft.ru/", "Luxoft (Deutsche Bank)"), new Organization(
+                shell remote scripting via ssh tunnels, PL/Python""", "Java архитектор\n"));
+        experience.put(new Organization("https://www.luxoft.ru/", "Luxoft (Deutsche Bank)"), new Period(
                 LocalDate.of(2010, 12, 1),
                 LocalDate.of(2012, 4, 1), """
                 Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper,
                 Oracle). Реализация клиентской и серверной части CRM. Реализация RIA-приложения для администрирования,
                 мониторинга и анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT,
                 ExtGWT (GXT), Highstock, Commet, HTML5.""", "Ведущий программист\n"));
-        experience.put(new Link("https://www.yota.ru/", "Yota"), new Organization(
+        experience.put(new Organization("https://www.yota.ru/", "Yota"), new Period(
                 LocalDate.of(2008, 6, 1),
                 LocalDate.of(2010, 12, 1),"""
                 Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J,
                 EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). Реализация администрирования, статистики и
                 мониторинга фреймворка. Разработка online JMX клиента (Python/ Jython, Django, ExtJS)""",
                 "Ведущий специалист\n"));
-        experience.put(new Link("http://enkata.com/", "Enkata"), new Organization(
+        experience.put(new Organization("http://enkata.com/", "Enkata"), new Period(
                 LocalDate.of(2007, 3, 1),
                 LocalDate.of(2008, 6, 1),"""
                 Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей
                 кластерного J2EE приложения (OLAP, Data mining).""", "Разработчик ПО\n"));
-        experience.put(new Link("https://www.siemens.com/global/en.html", "Siemens AG"), new Organization(
+        experience.put(new Organization("https://www.siemens.com/global/en.html", "Siemens AG"), new Period(
                 LocalDate.of(2005, 1, 1),
                 LocalDate.of(2007, 2, 1),"""
                 Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN
                 платформе Siemens @vantage (Java, Unix).""", "Разработчик ПО\n"));
-        experience.put(new Link("http://www.alcatel.ru/", "Alcatel"), new Organization(
+        experience.put(new Organization("http://www.alcatel.ru/", "Alcatel"), new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),"""
                 Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM).""",
@@ -131,38 +131,39 @@ public class ResumeTestData {
         resume.setSections(EXPERIENCE, new OrganizationSections(experience));
 
         //EDUCATION
-        Map<Link,Organization> education = new HashMap<>();
-        education.put(new Link("https://www.coursera.org/learn/scala-functional-programming", "Coursera"),
-                new Organization(
+
+        Map<Organization, Period> education = new HashMap<>();
+        education.put(new Organization("https://www.coursera.org/learn/scala-functional-programming", "Coursera"),
+                new Period(
                         LocalDate.of(2013, 3, 1),
                         LocalDate.of(2013, 5, 1),
                         "'Functional Programming Principles in Scala' by Martin Odersky", ""));
-        education.put(new Link("http://www.luxoft-training.ru/", "Luxoft"),
-                new Organization(
+        education.put(new Organization("http://www.luxoft-training.ru/", "Luxoft"),
+                new Period(
                         LocalDate.of(2011, 3, 1),
                         LocalDate.of(2011, 4, 1),
                         """
                                 Курс 'Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.'""",
                         ""));
-        education.put(new Link("https://www.siemens.com/global/en.html", "Siemens AG"),
-                new Organization(
+        education.put(new Organization("https://www.siemens.com/global/en.html", "Siemens AG"),
+                new Period(
                         LocalDate.of(2005, 1, 1),
                         LocalDate.of(2005, 4, 1),
                         "3 месяца обучения мобильным IN сетям (Берлин)", ""));
-        education.put(new Link("http://www.alcatel.ru/", "Alcatel"),
-                new Organization(
+        education.put(new Organization("http://www.alcatel.ru/", "Alcatel"),
+                new Period(
                         LocalDate.of(1997, 9, 1),
                         LocalDate.of(1998, 3, 1),
                         "6 месяцев обучения цифровым телефонным сетям (Москва)", ""));
-        education.put(new Link("http://www.ifmo.ru/", """
+        education.put(new Organization("http://www.ifmo.ru/", """
                         Санкт-Петербургский национальный исследовательский университет информационных технологий,
                         механики и оптики"""),
-                new Organization(
+                new Period(
                         LocalDate.of(1993, 9, 1),
                         LocalDate.of(1987, 7, 1),
                         "Аспирантура (программист С, С++)", ""));
-        education.put(new Link("https://mipt.ru/", "Заочная физико-техническая школа при МФТИ"),
-                new Organization(
+        education.put(new Organization("https://mipt.ru/", "Заочная физико-техническая школа при МФТИ"),
+                new Period(
                         LocalDate.of(1984, 9, 1),
                         LocalDate.of(1987, 6, 1),
                         "Закончил с отличием", ""));
