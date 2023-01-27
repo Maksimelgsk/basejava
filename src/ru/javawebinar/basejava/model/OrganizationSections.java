@@ -1,21 +1,37 @@
 package ru.javawebinar.basejava.model;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 public class OrganizationSections extends AbstractSection {
 
-    private final Map<Organization, Period> sections;
+    private final List<Organization> sections;
 
-    public OrganizationSections(Map<Organization, Period> sections) {
+    public OrganizationSections(List<Organization> sections) {
+        Objects.requireNonNull(sections, "organizations must not be null");
         this.sections = sections;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrganizationSections that = (OrganizationSections) o;
+
+        return sections.equals(that.sections);
+    }
+
+    @Override
+    public int hashCode() {
+        return sections.hashCode();
     }
 
     @Override
     public String toString() {
         StringBuilder organization = new StringBuilder("");
-        for (Map.Entry<Organization, Period> entry : sections.entrySet()) {
-            organization.append(entry.getKey()).append(entry.getValue());
+        for (Organization list : sections) {
+            organization.append(list).append("\n");
         }
         return organization.toString();
     }
