@@ -20,6 +20,18 @@ public class Organization {
         periods.add(new Period(description, position, dateFrom, dateTo));
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<Period> getPeriods() {
+        return periods;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -20,11 +20,13 @@ public class ResumeTestData {
 
         //OBJECTIVE
         resume.setSections(PERSONAL, new TextSection("""
-                Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры.\n"""));
+                Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры.\n
+                """));
 
         //PERSONAL
         resume.setSections(OBJECTIVE, new TextSection("""
-                Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям.\n"""));
+                Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям.\n
+                """));
 
         //QUALIFICATIONS
         List<String> qualifications = new ArrayList<>();
@@ -34,29 +36,36 @@ public class ResumeTestData {
                 * Version control: Subversion, Git, Mercury, ClearCase, Perforce""");
         TextSection qualificationsText3 = new TextSection("""
                 * DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, SQLite,
-                MS SQL, HSQLDB""");
+                MS SQL, HSQLDB
+                """);
         TextSection qualificationsText4 = new TextSection("""
-                * Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy""");
+                * Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy
+                """);
         TextSection qualificationsText5 = new TextSection("* XML/XSD/XSLT, SQL, C/C++, Unix shell scripts");
         TextSection qualificationsText6 = new TextSection("""
                 * Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, Spring (MVC, Security,
                 Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, ExtGWT/GXT), Vaadin,
-                Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).""");
+                Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).
+                """);
         TextSection qualificationsText7 = new TextSection("* Python: Django.");
         TextSection qualificationsText8 = new TextSection("* JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js");
         TextSection qualificationsText9 = new TextSection("* Scala: SBT, Play2, Specs2, Anorm, Spray, Akka");
         TextSection qualificationsText10 = new TextSection("""
                 * Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, StAX, SAX, DOM, XSLT,
                 MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, BPMN2, LDAP, OAuth1, OAuth2,
-                JWT.""");
+                JWT.
+                """);
         TextSection qualificationsText11 = new TextSection("""
-                * Инструменты: Maven + plugin development, Gradle, настройка Ngnix""");
+                * Инструменты: Maven + plugin development, Gradle, настройка Ngnix
+                """);
         TextSection qualificationsText12 = new TextSection("""
                 * Администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport,
-                OpenCmis, Bonita, pgBouncer""");
+                OpenCmis, Bonita, pgBouncer
+                """);
         TextSection qualificationsText13 = new TextSection("""
                 * Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектирования, архитектурных шаблонов,
-                UML, функционального программирования""");
+                UML, функционального программирования
+                """);
         TextSection qualificationsText14 = new TextSection("* Родной русский, английский \"upper intermediate\"");
         qualifications.add(qualificationsText1.getText());
         qualifications.add(qualificationsText2.getText());
@@ -97,7 +106,8 @@ public class ResumeTestData {
                         экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера
                         документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring
                         MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix shell remote scripting via
-                        ssh tunnels, PL/Python""",
+                        ssh tunnels, PL/Python
+                        """,
                 LocalDate.of(2012, 12, 1), LocalDate.of(2014, 10, 1)));
         experience.add(new Organization("https://www.luxoft.ru/", "Luxoft (Deutsche Bank)",
                 "Ведущий программист",
@@ -105,7 +115,8 @@ public class ResumeTestData {
                         Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT,
                         Jasper, Oracle). Реализация клиентской и серверной части CRM. Реализация RIA-приложения для
                         администрирования, мониторинга и анализа результатов в области алгоритмического трейдинга. JPA,
-                        Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, Commet, HTML5.""",
+                        Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, Commet, HTML5.
+                        """,
                 LocalDate.of(2010, 12, 1), LocalDate.of(2012, 4, 1)));
         experience.add(new Organization("https://www.yota.ru/", "Yota",
                 "Ведущий специалист",
@@ -113,27 +124,31 @@ public class ResumeTestData {
                         Дизайн и имплементация Java EE фреймворка для отдела "Платежные Системы" (GlassFish v2.1, v3,
                         OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). Реализация администрирования,
                         статистики и мониторинга фреймворка. Разработка online JMX клиента
-                        (Python/ Jython, Django, ExtJS)""",
+                        (Python/ Jython, Django, ExtJS)
+                        """,
                 LocalDate.of(2008, 6, 1), LocalDate.of(2010, 12, 1)));
         experience.add(new Organization("http://enkata.com/", "Enkata",
                 "Разработчик ПО",
                 """
                         Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS)
-                        частей кластерного J2EE приложения (OLAP, Data mining).""",
+                        частей кластерного J2EE приложения (OLAP, Data mining).
+                        """,
                 LocalDate.of(2007, 3, 1), LocalDate.of(2008, 6, 1)));
         experience.add(new Organization("https://www.siemens.com/global/en.html", "Siemens AG",
                 "Разработчик ПО",
                 """
                         Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на
-                        мобильной IN платформе Siemens @vantage (Java, Unix).""",
+                        мобильной IN платформе Siemens @vantage (Java, Unix).
+                        """,
                 LocalDate.of(2005, 1, 1), LocalDate.of(2007, 2, 1)));
         experience.add(new Organization("http://www.alcatel.ru/", "Alcatel",
                 "Инженер по аппаратному и программному тестированию",
                 """
                         Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12
-                        (CHILL, ASM).""",
+                        (CHILL, ASM).
+                        """,
                 LocalDate.of(1997, 9, 1), LocalDate.of(2005, 1, 1)));
-        resume.setSections(EXPERIENCE, new OrganizationSections(experience));
+        resume.setSections(EXPERIENCE, new OrganizationSection(experience));
 
         //EDUCATION
         List<Organization> education = new ArrayList<>();
@@ -162,7 +177,7 @@ public class ResumeTestData {
         education.add(new Organization("https://mipt.ru/", "Заочная физико-техническая школа при МФТИ",
                 "-", "Закончил с отличием",
                 LocalDate.of(1984, 9, 1), LocalDate.of(1987, 8, 1)));
-        resume.setSections(EDUCATION, new OrganizationSections(education));
+        resume.setSections(EDUCATION, new OrganizationSection(education));
 
         System.out.println(resume);
         System.out.println(PHONE.getTitle() + resume.getContacts(PHONE));

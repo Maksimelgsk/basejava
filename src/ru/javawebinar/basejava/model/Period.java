@@ -16,6 +16,22 @@ public class Period {
         this.dateTo = dateTo;
     }
 
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

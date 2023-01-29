@@ -3,13 +3,17 @@ package ru.javawebinar.basejava.model;
 import java.util.List;
 import java.util.Objects;
 
-public class OrganizationSections extends AbstractSection {
+public class OrganizationSection extends AbstractSection {
 
     private final List<Organization> sections;
 
-    public OrganizationSections(List<Organization> sections) {
+    public OrganizationSection(List<Organization> sections) {
         Objects.requireNonNull(sections, "organizations must not be null");
         this.sections = sections;
+    }
+
+    public List<Organization> getSections() {
+        return sections;
     }
 
     @Override
@@ -17,7 +21,7 @@ public class OrganizationSections extends AbstractSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrganizationSections that = (OrganizationSections) o;
+        OrganizationSection that = (OrganizationSection) o;
 
         return sections.equals(that.sections);
     }
