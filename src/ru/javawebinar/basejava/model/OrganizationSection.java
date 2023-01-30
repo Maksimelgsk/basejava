@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public class OrganizationSection extends AbstractSection {
 
-    private final List<Organization> sections;
+    private final List<Organization> organizationList;
 
     public OrganizationSection(List<Organization> sections) {
-        Objects.requireNonNull(sections, "organizations must not be null");
-        this.sections = sections;
+        Objects.requireNonNull(sections, "organizationList must not be null");
+        this.organizationList = sections;
     }
 
-    public List<Organization> getSections() {
-        return sections;
+    public List<Organization> getOrganizationList() {
+        return organizationList;
     }
 
     @Override
@@ -23,18 +23,18 @@ public class OrganizationSection extends AbstractSection {
 
         OrganizationSection that = (OrganizationSection) o;
 
-        return sections.equals(that.sections);
+        return organizationList.equals(that.organizationList);
     }
 
     @Override
     public int hashCode() {
-        return sections.hashCode();
+        return organizationList.hashCode();
     }
 
     @Override
     public String toString() {
         StringBuilder organization = new StringBuilder("");
-        for (Organization list : sections) {
+        for (Organization list : organizationList) {
             organization.append(list).append("\n");
         }
         return organization.toString();
