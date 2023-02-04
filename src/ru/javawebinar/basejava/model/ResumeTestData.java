@@ -1,5 +1,7 @@
 package ru.javawebinar.basejava.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,10 @@ import java.util.List;
 import static ru.javawebinar.basejava.model.ContactType.*;
 import static ru.javawebinar.basejava.model.SectionType.*;
 
-public class ResumeTestData {
+public class ResumeTestData implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     public static void main(String[] args) {
         printResume(createResume("id1", "Grigory Kislin"));
     }
