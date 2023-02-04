@@ -8,25 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public class ObjectStreamFileStorage extends AbstractStorage<File> {
 
     private final File directory;
+    private final StrategyStream storageStrategy;
 
-    protected AbstractFileStorage(File directory) {
+    protected ObjectStreamFileStorage(File directory, StrategyStream storageStrategy) {
         Objects.requireNonNull(directory, "directory must not be null");
+        Objects.requireNonNull(storageStrategy, "storageStrategy must not be null");
         if (!directory.isDirectory()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + "is not directory");
+            throw new IllegalArgumentException(directory.getAbsolutePath() + "isn't directory");
         }
         if (!directory.canRead() || !directory.canWrite()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + "is not readable/writable");
+            throw new IllegalArgumentException(directory.getAbsolutePath() + "isn't readable/writeable");
         }
         this.directory = directory;
+        this.storageStrategy = storageStrategy;
     }
 
     @Override
     protected void doUpdate(Resume r, File file) {
         try {
-            doWrite(r, new BufferedOutputStream(new FileOutputStream(file)));
+            storageStrategy.doWrite(r, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("I/O update error", r.getUuid(), e);
         }
@@ -54,7 +57,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File file) {
         try {
-            return doRead(new BufferedInputStream(new FileInputStream(file)));
+            return storageStrategy.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("I/O delete error", file.getName());
         }
@@ -71,6 +74,27 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     }
 
     @Override
+    public void clear() {
+        File[] files = directory.listFiles();
+        if (files == null) {
+            throw new StorageException("I/O directory error", directory.getName());
+        } else{
+            for (File file : files) {
+                doDelete(file);
+            }
+        }
+    }
+
+    @Override
+    public int size() {
+        String[] filesList = directory.list();
+        if (filesList != null) {
+            return filesList.length;
+        }
+        return 0;
+    }
+
+    @Override
     protected List<Resume> doGetAll() {
         File[] files = directory.listFiles();
         List<Resume> list = new ArrayList<>();
@@ -83,30 +107,4 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         }
         return list;
     }
-
-    @Override
-    public void clear() {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            throw new StorageException("I/O directory error", directory.getName());
-        } else {
-            for (File file : files) {
-                doDelete(file);
-            }
-        }
-    }
-
-    @Override
-    public int size() {
-        File[] files = directory.listFiles();
-        if (files != null) {
-            return files.length;
-        } else {
-            throw new StorageException("I/O directory error", directory.getName());
-        }
-    }
-
-    protected abstract void doWrite(Resume r, OutputStream file) throws IOException;
-
-    protected abstract Resume doRead(InputStream file) throws IOException;
 }
