@@ -6,7 +6,7 @@ public class TestSingleton {
     private static TestSingleton instance;
 
     public static TestSingleton getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new TestSingleton();
         }
         return instance;
@@ -20,7 +20,7 @@ public class TestSingleton {
         Singleton instance = Singleton.valueOf("INSTANCE");
         System.out.println(instance.ordinal());
 
-        for (SectionType type : SectionType.values()){
+        for (SectionType type : SectionType.values()) {
             System.out.println(type.getTitle());
         }
     }

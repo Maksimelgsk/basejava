@@ -40,11 +40,11 @@ public class Resume implements Serializable {
         return fullName;
     }
 
-    public void setSections(SectionType type, AbstractSection section){
+    public void setSections(SectionType type, AbstractSection section) {
         sections.put(type, section);
     }
 
-    public void setContacts(ContactType type, String contact){
+    public void setContacts(ContactType type, String contact) {
         contacts.put(type, contact);
     }
 

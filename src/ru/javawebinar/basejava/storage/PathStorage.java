@@ -9,9 +9,9 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PathStorage extends AbstractStorage<Path> {
@@ -78,7 +78,10 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     public void clear() {
         getFiles().forEach(this::doDelete);
-/**    Example using code with lambda expression:
+    }
+
+/*
+    Example using code with lambda expression:
 
         try (Stream<Path> files = Files.list(directory)) {
   1)
@@ -101,8 +104,7 @@ public class PathStorage extends AbstractStorage<Path> {
         } catch (IOException e) {
             throw new StorageException("Path directory error", getFileName(directory), e);
         }
-*/
-    }
+        */
 
     @Override
     public int size() {
@@ -111,20 +113,18 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> doGetAll() {
-        List<Resume> list = new ArrayList<>();
-        getFiles().forEach(path -> list.add(doGet(path)));
-        return list;
+        return getFiles().map(this::doGet).collect(Collectors.toList());
     }
 
-    private Stream<Path> getFiles(){
+    private Stream<Path> getFiles() {
         try {
             return Files.list(directory);
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new StorageException("Path directory error", getFileName(directory), e);
         }
     }
 
-    private String getFileName(Path path){
+    private String getFileName(Path path) {
         return path.getFileName().toString();
     }
 }

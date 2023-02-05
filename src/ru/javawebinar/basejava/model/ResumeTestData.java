@@ -13,6 +13,7 @@ public class ResumeTestData implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
     public static void main(String[] args) {
         printResume(createResume("id1", "Grigory Kislin"));
     }

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
 
 public class Period implements Serializable {
@@ -29,14 +30,14 @@ public class Period implements Serializable {
         this.dateTo = dateTo;
     }
 
-    public Period(String position, String description, int dateFrom, Month monthFrom, int dateTo, Month monthTo){
+    public Period(String position, String description, int dateFrom, Month monthFrom, int dateTo, Month monthTo) {
         this.position = position;
         this.description = description;
         this.dateFrom = DateUtil.of(dateFrom, monthFrom);
         this.dateTo = DateUtil.of(dateTo, monthTo);
     }
 
-    public Period(String position, String description, int dateFrom, Month monthFrom){
+    public Period(String position, String description, int dateFrom, Month monthFrom) {
         this.position = position;
         this.description = description;
         this.dateFrom = DateUtil.of(dateFrom, monthFrom);

@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.model.Resume;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     protected List<Resume> doGetAll() {
         return new ArrayList<>(listResumes);
     }
+
     @Override
     public int size() {
         return listResumes.size();

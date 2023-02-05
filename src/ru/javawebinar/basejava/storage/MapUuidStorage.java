@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.model.Resume;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,9 @@ public class MapUuidStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected void doDelete(String uuid) { mapUuid.keySet().remove(uuid);}
+    protected void doDelete(String uuid) {
+        mapUuid.keySet().remove(uuid);
+    }
 
     @Override
     protected Resume doGet(String uuid) {
@@ -35,7 +38,7 @@ public class MapUuidStorage extends AbstractStorage<String> {
 
     @Override
     protected boolean isExist(String uuid) {
-       return mapUuid.containsKey(uuid);
+        return mapUuid.containsKey(uuid);
     }
 
     @Override

@@ -20,7 +20,7 @@ public abstract class AbstractStorageTest {
     private static final String UUID_2 = "uuid_2";
     private static final String UUID_3 = "uuid_3";
     private static final String UUID_4 = "uuid_4";
-    private static final String  UUID_NOT_EXIST = "dummy";
+    private static final String UUID_NOT_EXIST = "dummy";
     private static final Resume RESUME_1;
     private static final Resume RESUME_2;
     private static final Resume RESUME_3;
