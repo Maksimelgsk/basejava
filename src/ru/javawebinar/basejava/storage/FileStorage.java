@@ -2,18 +2,19 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
+import ru.javawebinar.basejava.storage.strategy.StrategyStream;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ObjectStreamFileStorage extends AbstractStorage<File> {
+public class FileStorage extends AbstractStorage<File> {
 
     private final File directory;
     private final StrategyStream storageStrategy;
 
-    protected ObjectStreamFileStorage(File directory, StrategyStream storageStrategy) {
+    protected FileStorage(File directory, StrategyStream storageStrategy) {
         Objects.requireNonNull(directory, "directory must not be null");
         Objects.requireNonNull(storageStrategy, "storageStrategy must not be null");
         if (!directory.isDirectory()) {
@@ -47,9 +48,7 @@ public class ObjectStreamFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void doDelete(File file) {
-        if (file.delete()) {
-            System.out.println("File" + file.getName() + "successfully deleted");
-        } else {
+        if (!file.delete()) {
             throw new StorageException("I/O delete error", file.getName());
         }
     }
@@ -75,36 +74,33 @@ public class ObjectStreamFileStorage extends AbstractStorage<File> {
 
     @Override
     public void clear() {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            throw new StorageException("I/O directory error", directory.getName());
-        } else{
-            for (File file : files) {
-                doDelete(file);
-            }
+        File[] files = getFiles();
+        for (File file : files) {
+            doDelete(file);
         }
     }
 
     @Override
     public int size() {
-        String[] filesList = directory.list();
-        if (filesList != null) {
-            return filesList.length;
-        }
-        return 0;
+        File[] files = getFiles();
+        return files.length;
     }
 
     @Override
     protected List<Resume> doGetAll() {
-        File[] files = directory.listFiles();
+        File[] files = getFiles();
         List<Resume> list = new ArrayList<>();
-        if (files == null) {
-            throw new StorageException("I/O directory error", directory.getName());
-        } else {
-            for (File file : files) {
-                list.add(doGet(file));
-            }
+        for (File file : files) {
+            list.add(doGet(file));
         }
         return list;
+    }
+
+    private File[] getFiles(){
+        File[] files = directory.listFiles();
+        if(files == null){
+            throw new StorageException("I/O directory error", directory.getName());
+        }
+        return files;
     }
 }
