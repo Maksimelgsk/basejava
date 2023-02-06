@@ -9,7 +9,10 @@ public class OrganizationSection extends AbstractSection {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private final List<Organization> organizationList;
+    private List<Organization> organizationList;
+
+    public OrganizationSection() {
+    }
 
     public OrganizationSection(List<Organization> sections) {
         Objects.requireNonNull(sections, "organizationList must not be null");

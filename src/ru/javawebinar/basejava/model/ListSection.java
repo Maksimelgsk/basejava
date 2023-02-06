@@ -8,7 +8,10 @@ public class ListSection extends AbstractSection {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private final List<String> sections;
+    private List<String> sections;
+
+    public ListSection() {
+    }
 
     public ListSection(List<String> section) {
         Objects.requireNonNull(section, "sections must not be null");

@@ -1,18 +1,22 @@
 package ru.javawebinar.basejava.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
+@XmlRootElement
 public class Organization implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private final String link;
-    private final String title;
-    private final List<Period> periods;
+    private String link;
+    private String title;
+    private List<Period> periods;
+
+    public Organization() {
+    }
 
     public Organization(String link, String title, Period... periods) {
         Objects.requireNonNull(title, "title must not be null");

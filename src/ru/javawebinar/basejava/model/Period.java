@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.model;
 
 import ru.javawebinar.basejava.util.DateUtil;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,15 +11,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
-
+@XmlRootElement
 public class Period implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private final LocalDate dateFrom;
-    private final LocalDate dateTo;
-    private final String description;
-    private final String position;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
+    private String description;
+    private String position;
+
+    public Period() {
+    }
 
     public Period(String position, String description, LocalDate dateFrom, LocalDate dateTo) {
         Objects.requireNonNull(position, "position must not be null");

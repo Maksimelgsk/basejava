@@ -1,12 +1,16 @@
 package ru.javawebinar.basejava.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serial;
-
+@XmlRootElement
 public class TextSection extends AbstractSection {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private final String text;
+    private String text;
+
+    public TextSection() {
+    }
 
     public TextSection(String text) {
         this.text = text;
