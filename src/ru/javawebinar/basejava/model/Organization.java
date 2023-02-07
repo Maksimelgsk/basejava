@@ -1,5 +1,7 @@
 package ru.javawebinar.basejava.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serial;
 import java.io.Serializable;
@@ -7,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
 
     @Serial
@@ -41,20 +44,13 @@ public class Organization implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Organization that = (Organization) o;
-
-        if (!link.equals(that.link)) return false;
-        if (!title.equals(that.title)) return false;
-        return periods.equals(that.periods);
+        return link.equals(that.link) && title.equals(that.title) && periods.equals(that.periods);
     }
 
     @Override
     public int hashCode() {
-        int result = link.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + periods.hashCode();
-        return result;
+        return Objects.hash(link, title, periods);
     }
 
     @Override

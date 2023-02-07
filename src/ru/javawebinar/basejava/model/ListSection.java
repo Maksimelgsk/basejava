@@ -18,6 +18,10 @@ public class ListSection extends AbstractSection {
         this.sections = section;
     }
 
+//    public ListSection(String...section) {
+//        this(Arrays.asList(section));
+//    }
+
     public List<String> getSections() {
         return sections;
     }
@@ -26,15 +30,13 @@ public class ListSection extends AbstractSection {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ListSection that = (ListSection) o;
-
         return sections.equals(that.sections);
     }
 
     @Override
     public int hashCode() {
-        return sections.hashCode();
+        return Objects.hash(sections);
     }
 
     @Override

@@ -1,8 +1,14 @@
 package ru.javawebinar.basejava.model;
 
+import com.google.gson.annotations.JsonAdapter;
 import ru.javawebinar.basejava.util.DateUtil;
+import ru.javawebinar.basejava.util.JsonLocalDateAdapter;
+import ru.javawebinar.basejava.util.LocalDateAdapter;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,11 +18,16 @@ import java.util.Objects;
 
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Period implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @JsonAdapter(JsonLocalDateAdapter.class)
     private LocalDate dateFrom;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @JsonAdapter(JsonLocalDateAdapter.class)
     private LocalDate dateTo;
     private String description;
     private String position;
@@ -68,22 +79,14 @@ public class Period implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Period period = (Period) o;
-
-        if (!dateFrom.equals(period.dateFrom)) return false;
-        if (!dateTo.equals(period.dateTo)) return false;
-        if (!description.equals(period.description)) return false;
-        return position.equals(period.position);
+        return dateFrom.equals(period.dateFrom) && dateTo.equals(period.dateTo)
+                && description.equals(period.description) && position.equals(period.position);
     }
 
     @Override
     public int hashCode() {
-        int result = dateFrom.hashCode();
-        result = 31 * result + dateTo.hashCode();
-        result = 31 * result + description.hashCode();
-        result = 31 * result + position.hashCode();
-        return result;
+        return Objects.hash(dateFrom, dateTo, description, position);
     }
 
     @Override

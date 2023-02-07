@@ -68,18 +68,14 @@ public class Resume implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Resume resume = (Resume) o;
-
-        if (!uuid.equals(resume.uuid)) return false;
-        return fullName.equals(resume.fullName);
+        return uuid.equals(resume.uuid) && fullName.equals(resume.fullName) &&
+                sections.equals(resume.sections) && contacts.equals(resume.contacts);
     }
 
     @Override
     public int hashCode() {
-        int result = uuid.hashCode();
-        result = 31 * result + fullName.hashCode();
-        return result;
+        return Objects.hash(uuid, fullName, sections, contacts);
     }
 
     @Override

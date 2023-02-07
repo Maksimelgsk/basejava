@@ -1,5 +1,7 @@
 package ru.javawebinar.basejava.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serial;
 import java.io.Serializable;
@@ -10,6 +12,7 @@ import java.util.List;
 import static ru.javawebinar.basejava.model.ContactType.*;
 import static ru.javawebinar.basejava.model.SectionType.*;
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ResumeTestData implements Serializable {
 
     @Serial
