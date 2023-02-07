@@ -6,5 +6,5 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-abstract class AbstractSection implements Serializable {
+public abstract class AbstractSection implements Serializable {
 }

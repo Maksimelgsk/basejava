@@ -18,4 +18,10 @@ public enum SectionType {
         return title + "\n";
     }
 
+    @Override
+    public String toString() {
+        return "SectionType{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }
