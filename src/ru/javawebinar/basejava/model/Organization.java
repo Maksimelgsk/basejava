@@ -28,6 +28,12 @@ public class Organization implements Serializable {
         this.periods = Arrays.asList(periods);
     }
 
+    public Organization(String link, String title, List<Period> periods) {
+        this.link = link;
+        this.title = title;
+        this.periods = periods;
+    }
+
     public String getLink() {
         return link;
     }

@@ -6,7 +6,6 @@ import java.util.Objects;
 
 @XmlRootElement
 public class TextSection extends AbstractSection {
-
     @Serial
     private static final long serialVersionUID = 1L;
     private String text;

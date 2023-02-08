@@ -1,6 +1,7 @@
 package ru.javawebinar.basejava.model;
 
 import java.io.Serial;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,12 +19,15 @@ public class ListSection extends AbstractSection {
         this.sections = section;
     }
 
-//    public ListSection(String...section) {
-//        this(Arrays.asList(section));
-//    }
-
     public List<String> getSections() {
         return sections;
+    }
+
+    public void addSection(String text){
+        if(sections == null){
+            sections = new ArrayList<>();
+        }
+        sections.add(text);
     }
 
     @Override

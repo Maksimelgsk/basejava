@@ -80,8 +80,7 @@ public class Period implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Period period = (Period) o;
-        return dateFrom.equals(period.dateFrom) && dateTo.equals(period.dateTo)
-                && description.equals(period.description) && position.equals(period.position);
+        return dateFrom.equals(period.dateFrom) && dateTo.equals(period.dateTo) && Objects.equals(description, period.description) && position.equals(period.position);
     }
 
     @Override
