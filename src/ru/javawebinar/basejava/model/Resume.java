@@ -16,7 +16,6 @@ import java.util.UUID;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
     private String uuid;
@@ -47,8 +46,6 @@ public class Resume implements Serializable {
         this.uuid = uuid;
         this.fullName = fullName;
     }
-
-
 
     public String getUuid() {
         return uuid;

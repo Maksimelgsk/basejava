@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static ru.javawebinar.basejava.util.DateUtil.NOW;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Period implements Serializable {
@@ -80,7 +81,8 @@ public class Period implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Period period = (Period) o;
-        return dateFrom.equals(period.dateFrom) && dateTo.equals(period.dateTo) && Objects.equals(description, period.description) && position.equals(period.position);
+        return dateFrom.equals(period.dateFrom) && dateTo.equals(period.dateTo) &&
+                Objects.equals(description, period.description) && position.equals(period.position);
     }
 
     @Override

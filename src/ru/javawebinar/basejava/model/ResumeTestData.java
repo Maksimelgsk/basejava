@@ -11,10 +11,10 @@ import java.util.List;
 
 import static ru.javawebinar.basejava.model.ContactType.*;
 import static ru.javawebinar.basejava.model.SectionType.*;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ResumeTestData implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
 

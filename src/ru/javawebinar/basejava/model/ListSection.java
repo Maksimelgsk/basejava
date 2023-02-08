@@ -23,8 +23,8 @@ public class ListSection extends AbstractSection {
         return sections;
     }
 
-    public void addSection(String text){
-        if(sections == null){
+    public void addSection(String text) {
+        if (sections == null) {
             sections = new ArrayList<>();
         }
         sections.add(text);

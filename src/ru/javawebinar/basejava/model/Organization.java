@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
