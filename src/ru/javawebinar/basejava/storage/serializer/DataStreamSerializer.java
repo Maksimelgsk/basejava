@@ -41,10 +41,8 @@ public class DataStreamSerializer implements StrategyStream {
                             writeResume(dos, organization.getPeriods(), period -> {
                                 dos.writeUTF(period.getPosition());
                                 dos.writeUTF(period.getDescription());
-                                dos.writeInt(period.getDateFrom().getYear());
-                                dos.writeInt(period.getDateFrom().getMonth().getValue());
-                                dos.writeInt(period.getDateTo().getYear());
-                                dos.writeInt(period.getDateTo().getMonth().getValue());
+                                writeDate(dos, period.getDateFrom());
+                                writeDate(dos, period.getDateTo());
                             });
                         });
                     }
@@ -74,10 +72,9 @@ public class DataStreamSerializer implements StrategyStream {
                             resume.setSections(sectionType, new ListSection(readList(dis, dis::readUTF)));
                     case EXPERIENCE, EDUCATION ->
                             resume.setSections(sectionType, new OrganizationSection(readList(dis, () ->
-                                    new Organization(dis.readUTF(), dis.readUTF(), readList(dis, () ->
-                                            new Period(dis.readUTF(), dis.readUTF(),
-                                                    LocalDate.of(dis.readInt(), dis.readInt(), 1),
-                                                    LocalDate.of(dis.readInt(), dis.readInt(), 1)))))));
+                                    new Organization(dis.readUTF(),
+                                            dis.readUTF(), readList(dis, () ->
+                                            new Period(dis.readUTF(), dis.readUTF(), readDate(dis), readDate(dis)))))));
                 }
             });
             return resume;
@@ -105,6 +102,15 @@ public class DataStreamSerializer implements StrategyStream {
             list.add(reader.readList());
         }
         return list;
+    }
+
+    private void writeDate(DataOutputStream dos, LocalDate localDate) throws IOException {
+        dos.writeInt(localDate.getYear());
+        dos.writeInt(localDate.getMonth().getValue());
+    }
+
+    private LocalDate readDate(DataInputStream dis) throws IOException {
+        return LocalDate.of(dis.readInt(), dis.readInt(), 1);
     }
 
     @FunctionalInterface
