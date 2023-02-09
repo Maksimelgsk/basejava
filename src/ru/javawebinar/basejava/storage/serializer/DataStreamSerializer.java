@@ -66,8 +66,7 @@ public class DataStreamSerializer implements StrategyStream {
                 String sectionTitle = dis.readUTF();
                 SectionType sectionType = SectionType.valueOf(sectionTitle);
                 switch (sectionType) {
-                    case PERSONAL, OBJECTIVE ->
-                            resume.setSections(sectionType, new TextSection(dis.readUTF()));
+                    case PERSONAL, OBJECTIVE -> resume.setSections(sectionType, new TextSection(dis.readUTF()));
                     case ACHIEVEMENT, QUALIFICATIONS ->
                             resume.setSections(sectionType, new ListSection(readList(dis, dis::readUTF)));
                     case EXPERIENCE, EDUCATION ->
