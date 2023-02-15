@@ -20,7 +20,6 @@ public class MainStreams {
         printArray(array2);
     }
 
-
     private static int minValue(int[] values) {
         return Arrays.stream(values).
                 distinct().
