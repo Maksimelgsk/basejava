@@ -32,10 +32,7 @@ public class MainStreams {
                 .stream()
                 .collect(Collectors.partitioningBy(x -> x % 2 == 0, toList()));
         int list = map.get(false).size();
-        if (list % 2 != 0) {
-            return map.get(true);
-        }
-        return map.get(false);
+        return list % 2 == 0 ? map.get(false) : map.get(true);
     }
 
     private static void printDigits(int[] array) {
