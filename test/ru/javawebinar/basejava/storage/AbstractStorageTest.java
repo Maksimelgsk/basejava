@@ -6,7 +6,6 @@ import ru.javawebinar.basejava.Config;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.model.ResumeTestData;
 
 import java.io.File;
 import java.util.Arrays;
@@ -16,6 +15,9 @@ import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
+    protected static final String DB_URL = Config.get().getDbUrl();
+    protected static final String DB_USER = Config.get().getDbUser();
+    protected static final String DB_PASSWORD = Config.get().getDbPassword();
 
     protected final Storage storage;
     private static final String UUID_1 = "uuid_1";
@@ -33,10 +35,14 @@ public abstract class AbstractStorageTest {
     private static final String FULL_NAME_4 = "Name_4";
 
     static {
-        RESUME_1 = ResumeTestData.createResume(UUID_1, FULL_NAME_1);
-        RESUME_2 = ResumeTestData.createResume(UUID_2, FULL_NAME_2);
-        RESUME_3 = ResumeTestData.createResume(UUID_3, FULL_NAME_3);
-        RESUME_4 = ResumeTestData.createResume(UUID_4, FULL_NAME_4);
+//        RESUME_1 = ResumeTestData.createResume(UUID_1, FULL_NAME_1);
+//        RESUME_2 = ResumeTestData.createResume(UUID_2, FULL_NAME_2);
+//        RESUME_3 = ResumeTestData.createResume(UUID_3, FULL_NAME_3);
+//        RESUME_4 = ResumeTestData.createResume(UUID_4, FULL_NAME_4);
+        RESUME_1 = new Resume(UUID_1, "name1");
+        RESUME_2 = new Resume(UUID_2, "name2");
+        RESUME_3 = new Resume(UUID_3, "name3");
+        RESUME_4 = new Resume(UUID_4, "name4");
     }
 
     protected AbstractStorageTest(Storage storage) {
