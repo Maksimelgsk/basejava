@@ -29,7 +29,9 @@ public class SqlStorage implements Storage {
         sqlHelper.execute(query, ps -> {
             ps.setString(1, r.getFullName());
             ps.setString(2, r.getUuid());
-            if (ps.executeUpdate() == 0) throw new NotExistStorageException(r.getUuid());
+            if (ps.executeUpdate() == 0) {
+                throw new NotExistStorageException(r.getUuid());
+            }
             return null;
         });
     }
@@ -50,7 +52,9 @@ public class SqlStorage implements Storage {
         String query = "DELETE FROM resume r WHERE r.uuid=?";
         sqlHelper.execute(query, ps -> {
             ps.setString(1, uuid);
-            if (ps.executeUpdate() == 0) throw new NotExistStorageException(uuid);
+            if (ps.executeUpdate() == 0) {
+                throw new NotExistStorageException(uuid);
+            }
             return null;
         });
     }
@@ -61,7 +65,9 @@ public class SqlStorage implements Storage {
         return sqlHelper.execute(query, ps -> {
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) throw new NotExistStorageException(uuid);
+            if (!rs.next()) {
+                throw new NotExistStorageException(uuid);
+            }
             return new Resume(uuid, rs.getString("full_name"));
         });
     }
@@ -73,7 +79,7 @@ public class SqlStorage implements Storage {
             ResultSet rs = ps.executeQuery();
             List<Resume> list = new ArrayList<>();
             while (rs.next()) {
-                list.add(new Resume(rs.getString("uuid").trim(), rs.getString("full_name")));
+                list.add(new Resume(rs.getString("uuid"), rs.getString("full_name")));
             }
             return list;
         });
