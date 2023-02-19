@@ -12,9 +12,15 @@ import java.util.List;
 public class SqlStorage implements Storage {
 
     public final SqlHelper sqlHelper;
+    public static final String DB_DRIVER = "org.postgresql.Driver";
 
     public SqlStorage(String dbUrl, String dbUser, String dbPassword) {
-        sqlHelper = new SqlHelper(() -> DriverManager.getConnection(dbUrl, dbUser, dbPassword));
+        try {
+            Class.forName(DB_DRIVER).getDeclaredConstructor().newInstance();
+            sqlHelper = new SqlHelper(() -> DriverManager.getConnection(dbUrl, dbUser, dbPassword));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
