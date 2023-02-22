@@ -6,6 +6,7 @@ import ru.javawebinar.basejava.Config;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
+import ru.javawebinar.basejava.model.ResumeTestData;
 
 import java.io.File;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static ru.javawebinar.basejava.model.ContactType.*;
 
 public abstract class AbstractStorageTest {
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
@@ -33,14 +35,10 @@ public abstract class AbstractStorageTest {
     private static final String FULL_NAME_4 = "Name_4";
 
     static {
-//        RESUME_1 = ResumeTestData.createResume(UUID_1, FULL_NAME_1);
-//        RESUME_2 = ResumeTestData.createResume(UUID_2, FULL_NAME_2);
-//        RESUME_3 = ResumeTestData.createResume(UUID_3, FULL_NAME_3);
-//        RESUME_4 = ResumeTestData.createResume(UUID_4, FULL_NAME_4);
-        RESUME_1 = new Resume(UUID_1, "Name1");
-        RESUME_2 = new Resume(UUID_2, "Name2");
-        RESUME_3 = new Resume(UUID_3, "Name3");
-        RESUME_4 = new Resume(UUID_4, "Name4");
+        RESUME_1 = ResumeTestData.createResume(UUID_1, FULL_NAME_1);
+        RESUME_2 = ResumeTestData.createResume(UUID_2, FULL_NAME_2);
+        RESUME_3 = ResumeTestData.createResume(UUID_3, FULL_NAME_3);
+        RESUME_4 = ResumeTestData.createResume(UUID_4, FULL_NAME_4);
     }
 
     protected AbstractStorageTest(Storage storage) {
@@ -68,6 +66,13 @@ public abstract class AbstractStorageTest {
         Resume r1 = new Resume(UUID_1, "newName1");
         Resume r2 = new Resume(UUID_2, "newName2");
         Resume r3 = new Resume(UUID_3, "newName3");
+        RESUME_1.setContacts(PHONE, "+7-000-999-99-99");
+        RESUME_1.setContacts(SKYPE, "@skype_Name_1");
+        RESUME_1.setContacts(EMAIL, "mail@yahoo.com");
+        RESUME_1.setContacts(LINKEDIN, "@linkedid_Name_1");
+        RESUME_1.setContacts(GITHUB, "@gitHud_Name_1");
+        RESUME_1.setContacts(STACKOVERFLOW, "@stackoverflow_Name_1");
+        RESUME_1.setContacts(HOME_PAGE, "www.google.ru");
         storage.update(r1);
         storage.update(r2);
         storage.update(r3);
