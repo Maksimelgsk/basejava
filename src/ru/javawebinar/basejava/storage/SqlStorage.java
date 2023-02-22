@@ -32,17 +32,16 @@ public class SqlStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        String queryResume = "UPDATE resume r SET full_name = ? WHERE r.uuid = ?";
         sqlHelper.transactionalExecute(conn -> {
-            try (PreparedStatement ps = conn.prepareStatement(queryResume)) {
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE resume r SET full_name = ? WHERE r.uuid = ?")) {
                 ps.setString(1, r.getFullName());
                 ps.setString(2, r.getUuid());
                 if (ps.executeUpdate() == 0) {
                     throw new NotExistStorageException(r.getUuid());
                 }
             }
-            String queryContact = "DELETE FROM contact c WHERE resume_uuid=?";
-            sqlHelper.execute(queryContact, ps -> {
+            sqlHelper.execute(
+                    "DELETE FROM contact c WHERE resume_uuid=?", ps -> {
                 ps.setString(1, r.getUuid());
                 ps.executeUpdate();
                 return null;
@@ -100,18 +99,16 @@ public class SqlStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        String queryResume = "SELECT * FROM resume r ORDER BY r.full_name";
-        String queryContact = "SELECT * FROM contact r";
         List<Resume> list = new ArrayList<>();
         sqlHelper.transactionalExecute(conn -> {
-            try (PreparedStatement ps = conn.prepareStatement(queryResume)) {
+            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM resume r ORDER BY r.full_name")) {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Resume resume = new Resume(rs.getString("uuid"), rs.getString("full_name"));
                     list.add(resume);
                 }
             }
-            try (PreparedStatement ps = conn.prepareStatement(queryContact)) {
+            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM contact r")) {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     for (Resume resume : list) {
