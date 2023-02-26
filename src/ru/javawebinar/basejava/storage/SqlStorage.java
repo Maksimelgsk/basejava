@@ -21,9 +21,9 @@ public class SqlStorage implements Storage {
 
     public SqlStorage(String dbUrl, String dbUser, String dbPassword) {
         try {
-            Class.forName(DB_DRIVER).getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            Class.forName(DB_DRIVER);
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException("Driver not found", e);
         }
         sqlHelper = new SqlHelper(() -> DriverManager.getConnection(dbUrl, dbUser, dbPassword));
     }
@@ -104,9 +104,9 @@ public class SqlStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
+        String query = "SELECT * FROM resume ORDER BY full_name, uuid";
         return sqlHelper.transactionalExecute(conn -> {
             Map<String, Resume> resumes = new LinkedHashMap<>();
-            String query = "SELECT * FROM resume ORDER BY full_name, uuid";
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
