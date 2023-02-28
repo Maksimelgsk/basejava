@@ -40,7 +40,7 @@ public class ResumeServlet extends HttpServlet {
                         "padding: 10px;" +
                         "} " +
                         "table#t01 " +
-                        "{background-color: #f1f1c1;" +
+                        "{background-color: powderblue;" +
                         "}"+
                         "</style>" +
                         "</head> ");
