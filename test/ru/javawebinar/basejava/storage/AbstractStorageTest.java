@@ -73,6 +73,14 @@ public abstract class AbstractStorageTest {
         RESUME_1.setContacts(GITHUB, "@gitHud_Name_1");
         RESUME_1.setContacts(STACKOVERFLOW, "@stackoverflow_Name_1");
         RESUME_1.setContacts(HOME_PAGE, "www.google.ru");
+
+        RESUME_2.setContacts(PHONE, "+7-000-111-11-11");
+        RESUME_2.setContacts(SKYPE, "@skype_Name_2");
+        RESUME_2.setContacts(EMAIL, "yandex@yandex.com");
+        RESUME_2.setContacts(LINKEDIN, "@linkedid_Name_2");
+        RESUME_2.setContacts(GITHUB, "@gitHud_Name_2");
+        RESUME_2.setContacts(STACKOVERFLOW, "@stackoverflow_Name_2");
+        RESUME_2.setContacts(HOME_PAGE, "www.yandex.ru");
         storage.update(r1);
         storage.update(r2);
         storage.update(r3);

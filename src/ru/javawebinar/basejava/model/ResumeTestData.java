@@ -48,35 +48,35 @@ public class ResumeTestData implements Serializable {
         //QUALIFICATIONS
         List<String> qualifications = new ArrayList<>();
         TextSection qualificationsText1 = new TextSection("""
-                * JEE AS: GlassFish (v2.1, v3), OC4J, JBoss,Tomcat, Jetty, WebLogic, WSO2""");
+                JEE AS: GlassFish (v2.1, v3), OC4J, JBoss,Tomcat, Jetty, WebLogic, WSO2""");
         TextSection qualificationsText2 = new TextSection("""
-                * Version control: Subversion, Git, Mercury, ClearCase, Perforce""");
+                Version control: Subversion, Git, Mercury, ClearCase, Perforce""");
         TextSection qualificationsText3 = new TextSection("""
-                * DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, SQLite,
+                DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, SQLite,
                 MS SQL, HSQLDB""");
         TextSection qualificationsText4 = new TextSection("""
-                * Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy""");
-        TextSection qualificationsText5 = new TextSection("* XML/XSD/XSLT, SQL, C/C++, Unix shell scripts");
+                Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy""");
+        TextSection qualificationsText5 = new TextSection("XML/XSD/XSLT, SQL, C/C++, Unix shell scripts");
         TextSection qualificationsText6 = new TextSection("""
-                * Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, Spring (MVC, Security,
+                Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, Spring (MVC, Security,
                 Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, ExtGWT/GXT), Vaadin,
                 Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).""");
-        TextSection qualificationsText7 = new TextSection("* Python: Django.");
-        TextSection qualificationsText8 = new TextSection("* JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js");
-        TextSection qualificationsText9 = new TextSection("* Scala: SBT, Play2, Specs2, Anorm, Spray, Akka");
+        TextSection qualificationsText7 = new TextSection("Python: Django.");
+        TextSection qualificationsText8 = new TextSection("JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js");
+        TextSection qualificationsText9 = new TextSection("Scala: SBT, Play2, Specs2, Anorm, Spray, Akka");
         TextSection qualificationsText10 = new TextSection("""
-                * Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, StAX, SAX, DOM, XSLT,
+                Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, StAX, SAX, DOM, XSLT,
                 MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, BPMN2, LDAP, OAuth1, OAuth2,
                 JWT.""");
         TextSection qualificationsText11 = new TextSection("""
-                * Инструменты: Maven + plugin development, Gradle, настройка Ngnix""");
+                Инструменты: Maven + plugin development, Gradle, настройка Ngnix""");
         TextSection qualificationsText12 = new TextSection("""
-                * Администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport,
+                Администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport,
                 OpenCmis, Bonita, pgBouncer""");
         TextSection qualificationsText13 = new TextSection("""
-                * Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектирования, архитектурных шаблонов,
+                Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектирования, архитектурных шаблонов,
                 UML, функционального программирования""");
-        TextSection qualificationsText14 = new TextSection("* Родной русский, английский \"upper intermediate\"");
+        TextSection qualificationsText14 = new TextSection("Родной русский, английский \"upper intermediate\"");
         qualifications.add(qualificationsText1.getText());
         qualifications.add(qualificationsText2.getText());
         qualifications.add(qualificationsText3.getText());
@@ -172,42 +172,42 @@ public class ResumeTestData implements Serializable {
         List<Organization> education = new ArrayList<>();
         education.add(new Organization("https://www.coursera.org/", "Coursera",
                 new Period(
-                        "-",
                         "Functional Programming Principles in Scala' by Martin Odersky",
+                        "",
                         2013, Month.MARCH,
                         2013, Month.MAY)));
         education.add(new Organization("http://www.luxoft-training.ru/training/", "Luxoft",
                 new Period(
-                        "-",
                         "Курс 'Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.'",
+                        "",
                         2011, Month.MARCH,
                         2011, Month.APRIL)));
         education.add(new Organization("https://www.siemens.com/global/en.html", "Siemens AG",
                 new Period(
-                        "-",
                         "3 месяца обучения мобильным IN сетям (Берлин)",
+                        "",
                         2005, Month.JANUARY,
                         2005, Month.APRIL)));
         education.add(new Organization("http://www.alcatel.ru/", "Alcatel",
                 new Period(
-                        "-",
                         "6 месяцев обучения цифровым телефонным сетям (Москва)",
+                        "",
                         1997, Month.SEPTEMBER,
                         1998, Month.MARCH)));
         education.add(new Organization("http://www.ifmo.ru/",
                 "Санкт-Петербургский национальный исследовательский университет информационных технологий, " +
                         "механики и оптики",
                 new Period(
-                        "-", "Инженер (программист Fortran, C)",
+                        "Инженер (программист Fortran, C)", "",
                         1987, Month.SEPTEMBER, 1993, Month.JULY),
-                new Period("-", "Аспирантура (программист С, С++)",
+                new Period("Аспирантура (программист С, С++)", "",
                         1993, Month.SEPTEMBER, 1996, Month.JULY)));
 
 
         education.add(new Organization("https://mipt.ru/", "Заочная физико-техническая школа при МФТИ",
                 new Period(
-                        "-",
                         "Закончил с отличием",
+                        "",
                         1984, Month.SEPTEMBER,
                         1987, Month.AUGUST)));
         resume.setSections(EDUCATION, new OrganizationSection(education));
