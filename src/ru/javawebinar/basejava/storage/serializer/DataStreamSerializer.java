@@ -34,7 +34,7 @@ public class DataStreamSerializer implements StrategyStream {
                         writeResume(dos, list, dos::writeUTF);
                     }
                     case EXPERIENCE, EDUCATION -> {
-                        List<Organization> organizationsList = ((OrganizationSection) section).getOrganizationList();
+                        List<Organization> organizationsList = ((OrganizationSection) section).getOrganizations();
                         writeResume(dos, organizationsList, organization -> {
                             dos.writeUTF(organization.getLink());
                             dos.writeUTF(organization.getTitle());

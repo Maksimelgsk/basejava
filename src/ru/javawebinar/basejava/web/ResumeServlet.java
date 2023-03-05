@@ -42,21 +42,37 @@ public class ResumeServlet extends HttpServlet {
                 return;
             }
             case "view" -> r = storage.get(uuid);
+            case "add" -> r = Resume.EMPTY;
             case "edit" -> {
                 r = storage.get(uuid);
-                for (SectionType type : new SectionType[]{SectionType.EXPERIENCE, SectionType.EDUCATION}) {
-                    OrganizationSection section = (OrganizationSection) r.getSections(type);
-                    List<Organization> emptyFirstOrganizations = new ArrayList<>();
-                    emptyFirstOrganizations.add(Organization.EMPTY);
-                    if (section != null) {
-                        for (Organization org : section.getOrganizationList()) {
-                            List<Period> emptyFirstPositions = new ArrayList<>();
-                            emptyFirstPositions.add(Period.EMPTY);
-                            emptyFirstPositions.addAll(org.getPeriods());
-                            emptyFirstOrganizations.add(new Organization(org.getTitle(), org.getLink(), emptyFirstPositions));
+                for (SectionType type : SectionType.values()) {
+                    AbstractSection section = r.getSections(type);
+                    switch (type) {
+                        case OBJECTIVE, PERSONAL -> {
+                            if (section == null) {
+                                section = TextSection.EMPTY;
+                            }
+                        }
+                        case ACHIEVEMENT, QUALIFICATIONS -> {
+                            if (section == null) {
+                                section = ListSection.EMPTY;
+                            }
+                        }
+                        case EDUCATION, EXPERIENCE -> {
+                            OrganizationSection orgSection = (OrganizationSection) section;
+                            List<Organization> emptyFirstOrganizations = new ArrayList<>();
+                            emptyFirstOrganizations.add(Organization.EMPTY);
+                            if (section != null) {
+                                for (Organization org : orgSection.getOrganizations()) {
+                                    List<Period> emptyFirstPositions = new ArrayList<>();
+                                    emptyFirstPositions.add(Period.EMPTY);
+                                    emptyFirstPositions.addAll(org.getPeriods());
+                                    emptyFirstOrganizations.add(new Organization(org.getTitle(), org.getLink(), emptyFirstPositions));
+                                }
+                            }
+                            r.setSections(type, new OrganizationSection(emptyFirstOrganizations));
                         }
                     }
-                    r.setSections(type, new OrganizationSection(emptyFirstOrganizations));
                 }
             }
             default -> throw new IllegalArgumentException("Action " + action + " is illegal");
@@ -82,7 +98,6 @@ public class ResumeServlet extends HttpServlet {
                 r.setContacts(type, value);
             }
         }
-
         for (SectionType type : SectionType.values()) {
             String value = request.getParameter(type.name());
             String[] values = request.getParameterValues(type.name());
@@ -91,7 +106,8 @@ public class ResumeServlet extends HttpServlet {
             } else {
                 switch (type) {
                     case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
-                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type, new ListSection(List.of(value.split("\n"))));
+                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type,
+                            new ListSection(List.of(value.split("\n"))));
                     case EDUCATION, EXPERIENCE -> {
                         List<Organization> orgs = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");
@@ -110,7 +126,7 @@ public class ResumeServlet extends HttpServlet {
                                                 DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j])));
                                     }
                                 }
-                                orgs.add(new Organization(name, urls[i], positions));
+                                orgs.add(new Organization(urls[i], name, positions));
                             }
                         }
                         r.setSections(type, new OrganizationSection(orgs));

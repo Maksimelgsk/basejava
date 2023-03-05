@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <section>
-    <h2>${resume.fullName}&nbsp;<a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/edit.png"></a></h2>
+    <h2>${resume.fullName}&nbsp;<a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/edit.png" alt="edit"></a></h2>
     <p>
         <c:forEach var="contactEntry" items="${resume.contacts}">
             <jsp:useBean id="contactEntry"
@@ -26,7 +26,8 @@
     <table cellpadding="2">
         <c:forEach var="sectionEntry" items="${resume.sections}">
             <jsp:useBean id="sectionEntry"
-                         type="java.util.Map.Entry<ru.javawebinar.basejava.model.SectionType, ru.javawebinar.basejava.model.AbstractSection>"/>
+                         type="java.util.Map.Entry<ru.javawebinar.basejava.model.SectionType, 
+                         ru.javawebinar.basejava.model.AbstractSection>"/>
             <c:set var="type" value="${sectionEntry.key}"/>
             <c:set var="section" value="${sectionEntry.value}"/>
             <jsp:useBean id="section" type="ru.javawebinar.basejava.model.AbstractSection"/>
@@ -60,15 +61,15 @@
                     </tr>
                 </c:when>
                 <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
-                    <c:forEach var="org" items="<%=((OrganizationSection) section).getOrganizationList()%>">
+                    <c:forEach var="org" items="<%=((OrganizationSection) section).getOrganizations()%>">
                         <tr>
                             <td colspan="2">
                                 <c:choose>
                                     <c:when test="${empty org.title}">
-                                        <h3>${org.link}</h3>
+                                        <h3>${org.title}</h3>
                                     </c:when>
                                     <c:otherwise>
-                                        <h3><a href="${org.title}">${org.link}</a></h3>
+                                        <h3><a href="${org.link}">${org.link}</a></h3>
                                     </c:otherwise>
                                 </c:choose>
                             </td>

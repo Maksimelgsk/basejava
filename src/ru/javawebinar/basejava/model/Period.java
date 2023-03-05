@@ -21,7 +21,6 @@ import static ru.javawebinar.basejava.util.DateUtil.NOW;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Period implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -42,6 +41,7 @@ public class Period implements Serializable {
         Objects.requireNonNull(position, "position must not be null");
         Objects.requireNonNull(dateFrom, "dateFrom must not be null");
         Objects.requireNonNull(dateTo, "dateTo must not be null");
+        Objects.requireNonNull(description, "description must not be null");
         this.position = position;
         this.description = description;
         this.dateFrom = dateFrom;
