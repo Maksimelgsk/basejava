@@ -93,6 +93,17 @@ public class ResumeTestData implements Serializable {
         qualifications.add(qualificationsText14.getText());
         resume.setSections(QUALIFICATIONS, new ListSection(qualifications));
 
+        //ACHIEVEMENT
+        List<String> achievements = new ArrayList<>();
+        TextSection achievementText1 = new TextSection("достижение №1");
+        TextSection achievementText2 = new TextSection("достижение №2");
+        achievements.add(achievementText1.getText());
+        achievements.add(achievementText2.getText());
+        resume.setSections(ACHIEVEMENT, new ListSection(achievements));
+
+
+
+
         //EXPERIENCE
         List<Organization> experience = new ArrayList<>();
         experience.add(new Organization("https://javaops.ru/", "Java Online Projects",
@@ -226,6 +237,7 @@ public class ResumeTestData implements Serializable {
         System.out.println(PERSONAL.getTitle() + resume.getSections(PERSONAL));
         System.out.println(OBJECTIVE.getTitle() + resume.getSections(OBJECTIVE));
         System.out.println(QUALIFICATIONS.getTitle() + resume.getSections(QUALIFICATIONS));
+        System.out.println(ACHIEVEMENT.getTitle() + resume.getSections(ACHIEVEMENT));
         System.out.println(EXPERIENCE.getTitle() + resume.getSections(EXPERIENCE));
         System.out.println(EDUCATION.getTitle() + resume.getSections(EDUCATION));
     }

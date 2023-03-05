@@ -64,11 +64,11 @@
                         <tr>
                             <td colspan="2">
                                 <c:choose>
-                                    <c:when test="${empty org.link}">
-                                        <h3>${org.title}</h3>
+                                    <c:when test="${empty org.title}">
+                                        <h3>${org.link}</h3>
                                     </c:when>
                                     <c:otherwise>
-                                        <h3><a href="${org.link}">${org.title}</a></h3>
+                                        <h3><a href="${org.title}">${org.link}</a></h3>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
