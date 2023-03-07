@@ -102,7 +102,6 @@ public class ResumeServlet extends HttpServlet {
             isExist = false;
             r = new Resume(fullName);
         }
-
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (value != null && value.trim().length() != 0) {
@@ -111,56 +110,55 @@ public class ResumeServlet extends HttpServlet {
                 r.getContacts().remove(type);
             }
         }
-
         for (SectionType type : SectionType.values()) {
             String section = request.getParameter(type.name());
-
-            if (section == null && section.equals("")) {
+            if (section != null && section.trim().length() != 0) {
                 r.getSections().remove(type);
-                break;
-            }
-
-            switch (type) {
-                case PERSONAL, OBJECTIVE -> {
-                    TextSection textSection = new TextSection(section);
-                    r.setSections(type, textSection);
-                }
-                case ACHIEVEMENT, QUALIFICATIONS -> {
-                    List<String> listTmp = new ArrayList<>();
-                    String[] strings = section.split("\n");
-                    for (String s : strings) {
-                        if (!s.equals("\r")) {
-                            listTmp.add(s);
-                        }
+                switch (type) {
+                    case PERSONAL, OBJECTIVE -> {
+                        TextSection textSection = new TextSection(section);
+                        r.setSections(type, textSection);
                     }
-                    ListSection listSection = new ListSection(listTmp);
-                    r.setSections(type, listSection);
-                }
-                case EXPERIENCE, EDUCATION -> {
-                    List<Organization> orgs = new ArrayList<>();
-                    String[] values = request.getParameterValues(type.name());
-                    String[] url = request.getParameterValues(type.name() + "url");
-                    for (int i = 0; i < values.length; i++) {
-                        String name = values[i];
-                        if (name != null && !name.equals("null") && !name.equals("")) {
-                            List<Period> periods = new ArrayList<>();
-                            String periodCounter = type.name() + i;
-                            String[] startDates = request.getParameterValues(periodCounter + "startDate");
-                            String[] endDates = request.getParameterValues(periodCounter + "endDate");
-                            String[] titles = request.getParameterValues(periodCounter + "title");
-                            String[] descriptions = request.getParameterValues(periodCounter + "description");
-
-                            for (int j = 0; j < titles.length; j++) {
-                                if (titles[j] != null && !titles[j].equals("null") && !titles[j].equals("")) {
-                                    periods.add(new Period(titles[j], descriptions[j],
-                                            DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j])));
-                                }
+                    case ACHIEVEMENT, QUALIFICATIONS -> {
+                        List<String> listTmp = new ArrayList<>();
+                        String[] strings = section.split("\n");
+                        for (String s : strings) {
+                            if (!s.equals("\r")) {
+                                listTmp.add(s);
                             }
-                            orgs.add(new Organization(url[i], name, periods));
                         }
+                        ListSection listSection = new ListSection(listTmp);
+                        r.setSections(type, listSection);
                     }
-                    r.setSections(type, new OrganizationSection(orgs));
+                    case EXPERIENCE, EDUCATION -> {
+                        List<Organization> orgs = new ArrayList<>();
+                        String[] values = request.getParameterValues(type.name());
+                        String[] url = request.getParameterValues(type.name() + "url");
+                        for (int i = 0; i < values.length; i++) {
+                            String name = values[i];
+                            if (name != null && !name.equals("null") && !name.equals("")) {
+                                List<Period> periods = new ArrayList<>();
+                                String periodCounter = type.name() + i;
+                                String[] startDates = request.getParameterValues(periodCounter + "startDate");
+                                String[] endDates = request.getParameterValues(periodCounter + "endDate");
+                                String[] titles = request.getParameterValues(periodCounter + "title");
+                                String[] descriptions = request.getParameterValues(periodCounter + "description");
+
+                                for (int j = 0; j < titles.length; j++) {
+                                    if (titles[j] != null && !titles[j].equals("null") && !titles[j].equals("")) {
+                                        periods.add(new Period(titles[j], descriptions[j],
+                                                DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j])));
+                                    }
+                                }
+                                orgs.add(new Organization(url[i], name, periods));
+                            }
+                        }
+                        r.setSections(type, new OrganizationSection(orgs));
+                    }
                 }
+                break;
+            } else {
+                r.getSections().remove(type);
             }
         }
         if (isExist) {
