@@ -10,6 +10,41 @@
     <link rel="stylesheet" href="css/style.css">
     <jsp:useBean id="resume" type="ru.javawebinar.basejava.model.Resume" scope="request"/>
     <title>Резюме ${resume.fullName}</title>
+
+    <style>
+        button {
+            display: inline-block;
+            font-family: arial,sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            color: rgb(68,68,68);
+            text-decoration: none;
+            user-select: none;
+            padding: .2em 1.2em;
+            outline: none;
+            border: 1px solid rgba(0,0,0,.1);
+            border-radius: 2px;
+            background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+            transition: all .218s ease 0s;
+        }
+        button:hover {
+            color: rgb(24,24,24);
+            border: 1px solid rgb(198,198,198);
+            background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+            box-shadow: 0 1px 2px rgba(0,0,0,.1);
+        }
+        button:active {
+            color: rgb(51,51,51);
+            border: 1px solid rgb(204,204,204);
+            background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+            box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+    </style>
+
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
@@ -66,10 +101,10 @@
                             <td colspan="2">
                                 <c:choose>
                                     <c:when test="${empty org.title}">
-                                        <h3>${org.title}</h3>
+                                        <h3>${org.link}</h3>
                                     </c:when>
                                     <c:otherwise>
-                                        <h3><a href="${org.link}">${org.link}</a></h3>
+                                        <h3><a href="${org.link}">${org.title}</a></h3>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -88,7 +123,7 @@
         </c:forEach>
     </table>
     <br/>
-    <button onclick="window.history.back()">НАЗАД К СПИСКУ</button>
+    <button onclick="window.history.back()"><img src="img/back.png" alt="" style="vertical-align:middle"> BACK</button>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>

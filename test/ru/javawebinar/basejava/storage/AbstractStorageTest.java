@@ -39,6 +39,11 @@ public abstract class AbstractStorageTest {
         RESUME_2 = ResumeTestData.createResume(UUID_2, FULL_NAME_2);
         RESUME_3 = ResumeTestData.createResume(UUID_3, FULL_NAME_3);
         RESUME_4 = ResumeTestData.createResume(UUID_4, FULL_NAME_4);
+
+//        RESUME_1 = new Resume(UUID_1, "Name1");
+//        RESUME_2 = new Resume(UUID_2, "Name2");
+//        RESUME_3 = new Resume(UUID_3, "Name3");
+//        RESUME_4 = new Resume(UUID_4, "Name4");
     }
 
     protected AbstractStorageTest(Storage storage) {
@@ -74,13 +79,6 @@ public abstract class AbstractStorageTest {
         RESUME_1.setContacts(STACKOVERFLOW, "@stackoverflow_Name_1");
         RESUME_1.setContacts(HOME_PAGE, "www.google.ru");
 
-        RESUME_2.setContacts(PHONE, "+7-000-111-11-11");
-        RESUME_2.setContacts(SKYPE, "@skype_Name_2");
-        RESUME_2.setContacts(EMAIL, "yandex@yandex.com");
-        RESUME_2.setContacts(LINKEDIN, "@linkedid_Name_2");
-        RESUME_2.setContacts(GITHUB, "@gitHud_Name_2");
-        RESUME_2.setContacts(STACKOVERFLOW, "@stackoverflow_Name_2");
-        RESUME_2.setContacts(HOME_PAGE, "www.yandex.ru");
         storage.update(r1);
         storage.update(r2);
         storage.update(r3);

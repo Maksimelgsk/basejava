@@ -67,7 +67,8 @@ public class ResumeServlet extends HttpServlet {
                                     List<Period> emptyFirstPositions = new ArrayList<>();
                                     emptyFirstPositions.add(Period.EMPTY);
                                     emptyFirstPositions.addAll(org.getPeriods());
-                                    emptyFirstOrganizations.add(new Organization(org.getTitle(), org.getLink(), emptyFirstPositions));
+                                    emptyFirstOrganizations.add(new Organization(org.getTitle(),
+                                            org.getLink(), emptyFirstPositions));
                                 }
                             }
                             r.setSections(type, new OrganizationSection(emptyFirstOrganizations));
@@ -88,8 +89,13 @@ public class ResumeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
-        Resume r = storage.get(uuid);
-        r.setFullName(fullName);
+        Resume r;
+        if (uuid == null || uuid.length() == 0) {
+            r = new Resume(fullName);
+        } else {
+            r = storage.get(uuid);
+            r.setFullName(fullName);
+        }
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (HtmlUtil.isEmpty(value)) {
@@ -134,7 +140,11 @@ public class ResumeServlet extends HttpServlet {
                 }
             }
         }
-        storage.update(r);
+        if (uuid == null || uuid.length() == 0) {
+            storage.save(r);
+        } else {
+            storage.update(r);
+        }
         response.sendRedirect("resume");
     }
 }
