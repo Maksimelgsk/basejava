@@ -163,7 +163,6 @@ public class ResumeServlet extends HttpServlet {
                 }
             }
         }
-
         if (isExist) {
             storage.update(r);
         } else {
