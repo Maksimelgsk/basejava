@@ -179,8 +179,7 @@ public class ResumeServlet extends HttpServlet {
             } else {
                 switch (type) {
                     case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
-                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type,
-                            new ListSection(value.split("\\n")));
+                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type, new ListSection(value.split("\\n")));
                     case EDUCATION, EXPERIENCE -> {
                         List<Organization> orgs = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");
