@@ -89,19 +89,6 @@ public class ResumeServlet extends HttpServlet {
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
         Resume r = uuid.equals("") ? new Resume(fullName) : storage.get(uuid);;
-//        if (fullName.equals("")) {
-//            response.sendRedirect("resume");
-//            return;
-//        }
-//        boolean isExist;
-//        if (uuid != null && !uuid.equals("")) {
-//            isExist = true;
-//            r = storage.get(uuid);
-//            r.setFullName(fullName);
-//        } else {
-//            isExist = false;
-//            r = new Resume(fullName);
-//        }
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (value != null && value.trim().length() != 0) {
@@ -158,14 +145,10 @@ public class ResumeServlet extends HttpServlet {
                 }
                 break;
             } else {
-                r.getSections().remove(type);
+                response.sendRedirect("resume");
+                return;
             }
         }
-//        if (isExist) {
-//            storage.update(r);
-//        } else {
-//            storage.save(r);
-//        }
         if (fullName == null || fullName.trim().length() == 0) {
             response.sendRedirect("resume");
             return;
