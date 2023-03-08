@@ -88,20 +88,20 @@ public class ResumeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
-        Resume r;
-        if (fullName.equals("")) {
-            response.sendRedirect("resume");
-            return;
-        }
-        boolean isExist;
-        if (uuid != null && !uuid.equals("")) {
-            isExist = true;
-            r = storage.get(uuid);
-            r.setFullName(fullName);
-        } else {
-            isExist = false;
-            r = new Resume(fullName);
-        }
+        Resume r = uuid.equals("") ? new Resume(fullName) : storage.get(uuid);;
+//        if (fullName.equals("")) {
+//            response.sendRedirect("resume");
+//            return;
+//        }
+//        boolean isExist;
+//        if (uuid != null && !uuid.equals("")) {
+//            isExist = true;
+//            r = storage.get(uuid);
+//            r.setFullName(fullName);
+//        } else {
+//            isExist = false;
+//            r = new Resume(fullName);
+//        }
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (value != null && value.trim().length() != 0) {
@@ -131,7 +131,7 @@ public class ResumeServlet extends HttpServlet {
                         r.setSections(type, listSection);
                     }
                     case EXPERIENCE, EDUCATION -> {
-                        List<Organization> orgs = new ArrayList<>();
+                        List<Organization> organizations = new ArrayList<>();
                         String[] values = request.getParameterValues(type.name());
                         String[] url = request.getParameterValues(type.name() + "url");
                         for (int i = 0; i < values.length; i++) {
@@ -150,10 +150,10 @@ public class ResumeServlet extends HttpServlet {
                                                 DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j])));
                                     }
                                 }
-                                orgs.add(new Organization(url[i], name, periods));
+                                organizations.add(new Organization(url[i], name, periods));
                             }
                         }
-                        r.setSections(type, new OrganizationSection(orgs));
+                        r.setSections(type, new OrganizationSection(organizations));
                     }
                 }
                 break;
@@ -161,10 +161,20 @@ public class ResumeServlet extends HttpServlet {
                 r.getSections().remove(type);
             }
         }
-        if (isExist) {
-            storage.update(r);
-        } else {
+//        if (isExist) {
+//            storage.update(r);
+//        } else {
+//            storage.save(r);
+//        }
+        if (fullName == null || fullName.trim().length() == 0) {
+            response.sendRedirect("resume");
+            return;
+        }
+        r.setFullName(fullName);
+        if (uuid.equals("")) {
             storage.save(r);
+        } else {
+            storage.update(r);
         }
         response.sendRedirect("resume");
     }
