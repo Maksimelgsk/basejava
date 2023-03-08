@@ -90,13 +90,17 @@ public class ResumeServlet extends HttpServlet {
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
         Resume r;
+
         if (uuid == null || uuid.length() == 0) {
             r = new Resume(fullName);
         } else {
             r = storage.get(uuid);
             r.setFullName(fullName);
         }
-
+        if (HtmlUtil.isEmpty(fullName)) {
+            response.sendRedirect("resume");
+            return;
+        }
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (HtmlUtil.isEmpty(value)) {
@@ -141,10 +145,6 @@ public class ResumeServlet extends HttpServlet {
                     }
                 }
             }
-        }
-        if (fullName == null || fullName.trim().length() == 0) {
-            response.sendRedirect("resume");
-            return;
         }
         if (uuid == null || uuid.length() == 0) {
             storage.save(r);
