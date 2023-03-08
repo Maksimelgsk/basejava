@@ -114,7 +114,9 @@ public class ResumeServlet extends HttpServlet {
             String value = request.getParameter(type.name());
             String[] values = request.getParameterValues(type.name());
             if (HtmlUtil.isEmpty(value) && values.length < 2) {
-                r.getSections().remove(type);
+//                r.getSections().remove(type);
+                response.sendRedirect("resume");
+                return;
             } else {
                 switch (type) {
                     case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
