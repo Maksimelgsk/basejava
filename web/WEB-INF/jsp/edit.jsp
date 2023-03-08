@@ -77,7 +77,7 @@
             <h2><a>${type.title}</a></h2>
             <c:choose>
                 <c:when test="${type=='OBJECTIVE'}">
-                    <input type='text' name='${type}' size=75 value='<%=section%>'>
+                    <input type='text' name='${type}' size=75 value='<%=section%>' pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Fill field" required>
                 </c:when>
                 <c:when test="${type=='PERSONAL'}">
                     <textarea name='${type}' cols=75 rows=5><%=section%></textarea>
@@ -91,11 +91,13 @@
                                varStatus="counter">
                         <dl>
                             <dt>Название учереждения:</dt>
-                            <dd><input type="text" name='${type}' size=100 value="${org.link}"></dd>
+                            <dd><input type="text" name='${type}' size=100 value="${org.link}"
+                                       pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Enter Full Name" required></dd>
                         </dl>
                         <dl>
                             <dt>Сайт учереждения:</dt>
-                            <dd><input type="text" name='${type}url' size=100 value="${org.title}"></dd>
+                            <dd><input type="text" name='${type}url' size=100 value="${org.title}"
+                                       pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Enter Full Name" required></dd>
                             </dd>
                         </dl>
                         <br>
@@ -118,7 +120,7 @@
                                 <dl>
                                     <dt>Должность:</dt>
                                     <dd><input type="text" name='${type}${counter.index}title' size=75
-                                               value="${pos.position}">
+                                               value="${pos.position}" pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Enter Full Name" required>
                                 </dl>
                                 <dl>
                                     <dt>Описание:</dt>
