@@ -77,27 +77,25 @@
             <h2><a>${type.title}</a></h2>
             <c:choose>
                 <c:when test="${type=='OBJECTIVE'}">
-                    <input type='text' name='${type}' size=75 value='<%=section%>' pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Fill field" required>
+                    <input type='text' name='${type}' size=75 value='<%=section%>' placeholder="Fill the field" required>
                 </c:when>
                 <c:when test="${type=='PERSONAL'}">
-                    <textarea name='${type}' cols=75 rows=5><%=section%></textarea>
+                    <textarea name='${type}' cols=75 rows=5 placeholder="Fill the field" required><%=section%></textarea>
                 </c:when>
                 <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
-                    <textarea name='${type}' cols=75
-                              rows=5><%=String.join("\n", ((ListSection) section).getSections())%></textarea>
+                    <textarea name='${type}' cols=75 rows=5 placeholder="Fill the field" required><%=String.join("\n", ((ListSection) section).getSections())%></textarea>
                 </c:when>
+
                 <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
                     <c:forEach var="org" items="<%=((OrganizationSection) section).getOrganizations()%>"
                                varStatus="counter">
                         <dl>
                             <dt>Название учереждения:</dt>
-                            <dd><input type="text" name='${type}' size=100 value="${org.link}"
-                                       pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Enter Full Name" required></dd>
+                            <dd><input type="text" name='${type}' size=100 value="${org.link}"></dd>
                         </dl>
                         <dl>
                             <dt>Сайт учереждения:</dt>
-                            <dd><input type="text" name='${type}url' size=100 value="${org.title}"
-                                       pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Enter Full Name" required></dd>
+                            <dd><input type="text" name='${type}url' size=100 value="${org.title}"></dd>
                             </dd>
                         </dl>
                         <br>
@@ -120,7 +118,7 @@
                                 <dl>
                                     <dt>Должность:</dt>
                                     <dd><input type="text" name='${type}${counter.index}title' size=75
-                                               value="${pos.position}" pattern="[А-Яа-яa-zA-Z\s]{2,}" placeholder="Enter Full Name" required>
+                                               value="${pos.position}">
                                 </dl>
                                 <dl>
                                     <dt>Описание:</dt>
