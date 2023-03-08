@@ -91,7 +91,7 @@ public class ResumeServlet extends HttpServlet {
         String fullName = request.getParameter("fullName");
         Resume r;
 
-        if (uuid == null || uuid.length() == 0) {
+        if (uuid == null || uuid.trim().length() == 0) {
             r = new Resume(fullName);
         } else {
             r = storage.get(uuid);
@@ -180,7 +180,7 @@ public class ResumeServlet extends HttpServlet {
                 switch (type) {
                     case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
                     case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type,
-                            new ListSection(List.of(value.split("\n"))));
+                            new ListSection(value.split("\\n")));
                     case EDUCATION, EXPERIENCE -> {
                         List<Organization> orgs = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");
