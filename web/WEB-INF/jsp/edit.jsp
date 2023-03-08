@@ -77,13 +77,13 @@
             <h2><a>${type.title}</a></h2>
             <c:choose>
                 <c:when test="${type=='OBJECTIVE'}">
-                    <input type='text' name='${type}' size=75 value='<%=section%>' placeholder="Fill the field" required>
+                    <input type='text' name='${type}' size=75 value='<%=section%>' placeholder="Required field" required>
                 </c:when>
                 <c:when test="${type=='PERSONAL'}">
-                    <textarea name='${type}' cols=75 rows=5 placeholder="Fill the field" required><%=section%></textarea>
+                    <textarea name='${type}' cols=75 rows=5 placeholder="Required field" required><%=section%></textarea>
                 </c:when>
                 <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
-                    <textarea name='${type}' cols=75 rows=5 placeholder="Fill the field" required><%=String.join("\n", ((ListSection) section).getSections())%></textarea>
+                    <textarea name='${type}' cols=75 rows=5 placeholder="Required field" required><%=String.join("\n", ((ListSection) section).getSections())%></textarea>
                 </c:when>
 
                 <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
@@ -91,11 +91,11 @@
                                varStatus="counter">
                         <dl>
                             <dt>Название учереждения:</dt>
-                            <dd><input type="text" name='${type}' size=100 value="${org.link}"></dd>
+                            <dd><input type="text" name='${type}' size=100 value="${org.link}" placeholder="Fill field"></dd>
                         </dl>
                         <dl>
                             <dt>Сайт учереждения:</dt>
-                            <dd><input type="text" name='${type}url' size=100 value="${org.title}"></dd>
+                            <dd><input type="text" name='${type}url' size=100 value="${org.title}" placeholder="Fill field"></dd>
                             </dd>
                         </dl>
                         <br>
@@ -118,12 +118,12 @@
                                 <dl>
                                     <dt>Должность:</dt>
                                     <dd><input type="text" name='${type}${counter.index}title' size=75
-                                               value="${pos.position}">
+                                               value="${pos.position}" placeholder="Fill field">
                                 </dl>
                                 <dl>
                                     <dt>Описание:</dt>
                                     <dd><textarea name="${type}${counter.index}description" rows=5
-                                                  cols=75>${pos.description}</textarea></dd>
+                                                  cols=75 placeholder="Fill field">${pos.description}</textarea></dd>
                                 </dl>
                             </c:forEach>
                         </div>
