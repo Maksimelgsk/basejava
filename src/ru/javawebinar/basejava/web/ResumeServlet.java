@@ -104,8 +104,7 @@ public class ResumeServlet extends HttpServlet {
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (HtmlUtil.isEmpty(value)) {
-                response.sendRedirect("resume");
-                return;
+                r.getContacts().remove(type);
             } else {
                 r.setContacts(type, value);
             }
