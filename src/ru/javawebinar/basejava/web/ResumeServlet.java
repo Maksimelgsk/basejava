@@ -4,6 +4,7 @@ import ru.javawebinar.basejava.Config;
 import ru.javawebinar.basejava.model.*;
 import ru.javawebinar.basejava.storage.Storage;
 import ru.javawebinar.basejava.util.DateUtil;
+import ru.javawebinar.basejava.util.HtmlUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -88,73 +89,62 @@ public class ResumeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
-        Resume r = uuid.equals("") ? new Resume(fullName) : storage.get(uuid);;
+        Resume r;
+        if (uuid == null || uuid.length() == 0) {
+            r = new Resume(fullName);
+        } else {
+            r = storage.get(uuid);
+            r.setFullName(fullName);
+        }
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
-            if (value != null && value.trim().length() != 0) {
-                r.setContacts(type, value);
-            } else {
+            if (HtmlUtil.isEmpty(value)) {
                 r.getContacts().remove(type);
+            } else {
+                r.setContacts(type, value);
             }
         }
         for (SectionType type : SectionType.values()) {
-            String section = request.getParameter(type.name());
-            if (section != null && section.trim().length() != 0) {
+            String value = request.getParameter(type.name());
+            String[] values = request.getParameterValues(type.name());
+            if (HtmlUtil.isEmpty(value) && values.length < 2) {
                 r.getSections().remove(type);
+            } else {
                 switch (type) {
-                    case PERSONAL, OBJECTIVE -> {
-                        TextSection textSection = new TextSection(section);
-                        r.setSections(type, textSection);
-                    }
-                    case ACHIEVEMENT, QUALIFICATIONS -> {
-                        List<String> listTmp = new ArrayList<>();
-                        String[] strings = section.split("\n");
-                        for (String s : strings) {
-                            if (!s.equals("\r")) {
-                                listTmp.add(s);
-                            }
-                        }
-                        ListSection listSection = new ListSection(listTmp);
-                        r.setSections(type, listSection);
-                    }
-                    case EXPERIENCE, EDUCATION -> {
-                        List<Organization> organizations = new ArrayList<>();
-                        String[] values = request.getParameterValues(type.name());
-                        String[] url = request.getParameterValues(type.name() + "url");
+                    case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
+                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type,
+                            new ListSection(List.of(value.split("\n"))));
+                    case EDUCATION, EXPERIENCE -> {
+                        List<Organization> orgs = new ArrayList<>();
+                        String[] urls = request.getParameterValues(type.name() + "url");
                         for (int i = 0; i < values.length; i++) {
                             String name = values[i];
-                            if (name != null && !name.equals("null") && !name.equals("")) {
-                                List<Period> periods = new ArrayList<>();
-                                String periodCounter = type.name() + i;
-                                String[] startDates = request.getParameterValues(periodCounter + "startDate");
-                                String[] endDates = request.getParameterValues(periodCounter + "endDate");
-                                String[] titles = request.getParameterValues(periodCounter + "title");
-                                String[] descriptions = request.getParameterValues(periodCounter + "description");
-
+                            if (!HtmlUtil.isEmpty(name)) {
+                                List<Period> positions = new ArrayList<>();
+                                String pfx = type.name() + i;
+                                String[] startDates = request.getParameterValues(pfx + "startDate");
+                                String[] endDates = request.getParameterValues(pfx + "endDate");
+                                String[] titles = request.getParameterValues(pfx + "title");
+                                String[] descriptions = request.getParameterValues(pfx + "description");
                                 for (int j = 0; j < titles.length; j++) {
-                                    if (titles[j] != null && !titles[j].equals("null") && !titles[j].equals("")) {
-                                        periods.add(new Period(titles[j], descriptions[j],
+                                    if (!HtmlUtil.isEmpty(titles[j])) {
+                                        positions.add(new Period(titles[j], descriptions[j],
                                                 DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j])));
                                     }
                                 }
-                                organizations.add(new Organization(url[i], name, periods));
+                                orgs.add(new Organization(urls[i], name, positions));
                             }
                         }
-                        r.setSections(type, new OrganizationSection(organizations));
+                        r.setSections(type, new OrganizationSection(orgs));
                     }
                 }
-                break;
-            } else {
-                response.sendRedirect("resume");
-                return;
             }
         }
         if (fullName == null || fullName.trim().length() == 0) {
             response.sendRedirect("resume");
             return;
         }
-        r.setFullName(fullName);
-        if (uuid.equals("")) {
+        if (uuid == null || uuid.length() == 0) {
             storage.save(r);
         } else {
             storage.update(r);
