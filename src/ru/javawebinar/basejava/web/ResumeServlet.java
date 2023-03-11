@@ -101,54 +101,8 @@ public class ResumeServlet extends HttpServlet {
             response.sendRedirect("resume");
             return;
         }
-//        for (ContactType type : ContactType.values()) {
-//            String value = request.getParameter(type.name());
-//            if (HtmlUtil.isEmpty(value)) {
-//                r.getContacts().remove(type);
-//            } else {
-//                r.setContacts(type, value);
-//            }
-//        }
         addContact(request, r);
         addSection(request, r);
-//        for (SectionType type : SectionType.values()) {
-//            String value = request.getParameter(type.name());
-//            String[] values = request.getParameterValues(type.name());
-//            if (HtmlUtil.isEmpty(value) && values.length < 2) {
-////                r.getSections().remove(type);
-//                response.sendRedirect("resume");
-//                return;
-//            } else {
-//                switch (type) {
-//                    case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
-//                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type,
-//                            new ListSection(List.of(value.split("\n"))));
-//                    case EDUCATION, EXPERIENCE -> {
-//                        List<Organization> orgs = new ArrayList<>();
-//                        String[] urls = request.getParameterValues(type.name() + "url");
-//                        for (int i = 0; i < values.length; i++) {
-//                            String name = values[i];
-//                            if (!HtmlUtil.isEmpty(name)) {
-//                                List<Period> positions = new ArrayList<>();
-//                                String pfx = type.name() + i;
-//                                String[] startDates = request.getParameterValues(pfx + "startDate");
-//                                String[] endDates = request.getParameterValues(pfx + "endDate");
-//                                String[] titles = request.getParameterValues(pfx + "title");
-//                                String[] descriptions = request.getParameterValues(pfx + "description");
-//                                for (int j = 0; j < titles.length; j++) {
-//                                    if (!HtmlUtil.isEmpty(titles[j])) {
-//                                        positions.add(new Period(titles[j], descriptions[j],
-//                                                DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j])));
-//                                    }
-//                                }
-//                                orgs.add(new Organization(urls[i], name, positions));
-//                            }
-//                        }
-//                        r.setSections(type, new OrganizationSection(orgs));
-//                    }
-//                }
-//            }
-//        }
         if (HtmlUtil.isEmpty(uuid)) {
             storage.save(r);
         } else {
@@ -177,7 +131,8 @@ public class ResumeServlet extends HttpServlet {
             } else {
                 switch (type) {
                     case OBJECTIVE, PERSONAL -> r.setSections(type, new TextSection(value));
-                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type, new ListSection(value.split("\\n")));
+                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSections(type,
+                            new ListSection(value.replaceAll("</br>", "").split("\\r\\n\\s*")));
                     case EDUCATION, EXPERIENCE -> {
                         List<Organization> orgs = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");

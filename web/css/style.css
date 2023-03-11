@@ -1,0 +1,86 @@
+header {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+footer {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+    margin: 20px 0;
+}
+
+dl {
+    background: no-repeat scroll 0 0 #FAFAFA;
+    margin: 8px 0;
+    padding: 0;
+}
+
+dt {
+    display: inline-block;
+    width: 170px;
+}
+
+dd {
+
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+h2 {
+    margin: 15px 0 5px;
+}
+
+h3 {
+    margin: 15px 0 5px;
+}
+
+li {
+    margin: 15px 0;
+}
+
+a[href^="skype:"] {
+    padding-left: 20px !important;
+    background: url(../img/skype1.png) no-repeat center left;
+}
+
+a[href^="mailto:"] {
+    padding-left: 20px !important;
+    background: url(../img/mail.png) no-repeat center left;
+}
+
+a[href^="https://stackoverflow.com"] {
+    padding-left: 20px !important;
+    background: url(../img/stack-overflow.png) no-repeat center left;
+}
+
+a[href^="https://www.linkedin.com"] {
+    padding-left: 20px !important;
+    background: url(../img/free-icon-linkedin-145807.png) no-repeat center left;
+}
+
+a[href*="github."] {
+    padding-left: 20px !important;
+    background: url(../img/github1.png) no-repeat center left;
+}
+
+textarea {
+    font-size:1em;
+    width: 80%;
+    height: 10em;
+    border-radius: 0.2em;
+    border: 1px solid #000; /* everything up to and including this line
+                               are aesthetics, adjust to taste */
+    outline: none; /* removes the default outline */
+    resize: none; /* prevents the user-resizing, adjust to taste */
+}
+
+
+
+
+
+
