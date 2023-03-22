@@ -45,36 +45,36 @@ public class ResumeServlet extends HttpServlet {
             case "add" -> r = Resume.EMPTY;
             case "edit" -> {
                 r = storage.get(uuid);
-                for (SectionType type : SectionType.values()) {
-                    AbstractSection section = r.getSections(type);
-                    switch (type) {
-                        case OBJECTIVE, PERSONAL -> {
-                            if (section == null) {
-                                section = TextSection.EMPTY;
-                            }
-                        }
-                        case ACHIEVEMENT, QUALIFICATIONS -> {
-                            if (section == null) {
-                                section = ListSection.EMPTY;
-                            }
-                        }
-                        case EDUCATION, EXPERIENCE -> {
-                            OrganizationSection orgSection = (OrganizationSection) section;
-                            List<Organization> emptyFirstOrganizations = new ArrayList<>();
-                            emptyFirstOrganizations.add(Organization.EMPTY);
-                            if (section != null) {
-                                for (Organization org : orgSection.getOrganizations()) {
-                                    List<Period> emptyFirstPositions = new ArrayList<>();
-                                    emptyFirstPositions.add(Period.EMPTY);
-                                    emptyFirstPositions.addAll(org.getPeriods());
-                                    emptyFirstOrganizations.add(new Organization(org.getTitle(),
-                                            org.getLink(), emptyFirstPositions));
-                                }
-                            }
-                            r.setSections(type, new OrganizationSection(emptyFirstOrganizations));
-                        }
-                    }
-                }
+//                for (SectionType type : SectionType.values()) {
+//                    AbstractSection section = r.getSections(type);
+//                    switch (type) {
+//                        case OBJECTIVE, PERSONAL -> {
+//                            if (section == null) {
+//                                section = TextSection.EMPTY;
+//                            }
+//                        }
+//                        case ACHIEVEMENT, QUALIFICATIONS -> {
+//                            if (section == null) {
+//                                section = ListSection.EMPTY;
+//                            }
+//                        }
+//                        case EDUCATION, EXPERIENCE -> {
+//                            OrganizationSection orgSection = (OrganizationSection) section;
+//                            List<Organization> emptyFirstOrganizations = new ArrayList<>();
+//                            emptyFirstOrganizations.add(Organization.EMPTY);
+//                            if (section != null) {
+//                                for (Organization org : orgSection.getOrganizations()) {
+//                                    List<Period> emptyFirstPositions = new ArrayList<>();
+//                                    emptyFirstPositions.add(Period.EMPTY);
+//                                    emptyFirstPositions.addAll(org.getPeriods());
+//                                    emptyFirstOrganizations.add(new Organization(org.getTitle(),
+//                                            org.getLink(), emptyFirstPositions));
+//                                }
+//                            }
+//                            r.setSections(type, new OrganizationSection(emptyFirstOrganizations));
+//                        }
+//                    }
+//                }
             }
             default -> throw new IllegalArgumentException("Action " + action + " is illegal");
         }

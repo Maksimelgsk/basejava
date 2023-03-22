@@ -94,11 +94,11 @@
                                varStatus="counter">
                         <dl>
                             <dt>Название учереждения:</dt>
-                            <dd><input type="text" name='${type}' size=100 value="${org.link}" placeholder="Fill field"></dd>
+                            <dd><input type="text" name='${type}' size=100 value="${org.title}" placeholder="Fill field"></dd>
                         </dl>
                         <dl>
                             <dt>Сайт учереждения:</dt>
-                            <dd><input type="text" name='${type}url' size=100 value="${org.title}" placeholder="Fill field"></dd>
+                            <dd><input type="text" name='${type}url' size=100 value="${org.link}" placeholder="Fill field"></dd>
                             </dd>
                         </dl>
                         <br>
